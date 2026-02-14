@@ -171,6 +171,7 @@ RB42.Config = {
 
 - [ ] **`ClothingItem = Shoes_TrainerTINT`** in item script may skip custom `Shoes_Rollerblades.xml`
 - [ ] Custom 3D rollerblade models
+- [ ] Designed for MP - untested though
 
 ## Known Limitations
 
@@ -180,7 +181,7 @@ RB42.Config = {
 
 ## Credits
 
-- **Mod by**: GingerVitis55/bjelen; 
+- **Mod by**: GingerVitis55; 
 - **Build**: Project Zomboid Build 42
 
 ## License
@@ -192,4 +193,4 @@ Free to use and modify. Give credit if redistributing.
 **Version**: 1.1
 **Build**: 42+
 **Multiplayer**: Should work
-**Last Updated**: February 13, 2026
+**Last Updated**: February 14, 2026

@@ -1,0 +1,30 @@
+module Rollerblades42
+{
+    recipe Replace_Rollerblade_Wheels
+    {
+        keep Rollerblades42.Rollerblades,
+        keep Base.Screwdriver,
+        
+        Base.RollerbladeWheels,
+        
+        Result:Rollerblades42.Rollerblades,
+        OnCreate:RB42_OnReplaceWheels,
+        Time:60.0,
+        Category:Repair,
+    }
+
+    recipe Clean_Rollerblade_Wheels
+    {
+        keep Rollerblades42.Rollerblades,
+        keep Base.Screwdriver,
+        keep Base.Toothbrush,
+        
+        Base.Grease,
+        Base.AlcoholWipes,
+        
+        Result:Rollerblades42.Rollerblades,
+        OnCreate:RB42_OnCleanWheels,
+        Time:60.0,
+        Category:Repair,
+    }
+}

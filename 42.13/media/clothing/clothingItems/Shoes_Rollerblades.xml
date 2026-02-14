@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<clothingItem>
+  <name>Shoes_Rollerblades</name>
+
+  <!-- Reuse an existing shoe model/rig slot -->
+  <model>Shoes_TrainerTINT</model>
+
+  <!-- IMPORTANT: BaseTextures are what get drawn on the player -->
+  <baseTextures>
+    <baseTexture>ClothingItems/Shoes_Rollerblades</baseTexture>
+  </baseTextures>
+
+  <allowRandomTint>false</allowRandomTint>
+</clothingItem>
