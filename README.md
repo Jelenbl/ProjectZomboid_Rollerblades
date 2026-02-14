@@ -2,6 +2,9 @@
 
 A fully-featured mod that adds functional rollerblades to Project Zomboid with terrain-based speed mechanics, skill progression, and maintenance systems.
 
+Workshop ID: 3665841859
+Mod ID: Rollerblades42
+
 ## Features
 
 ### Dynamic Speed System
