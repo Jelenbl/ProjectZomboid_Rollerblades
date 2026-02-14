@@ -30,7 +30,7 @@ A fully-featured mod that adds functional rollerblades to Project Zomboid with t
 
 ### Maintenance System
 - **Replace Wheels**: Right-click → Requires Screwdriver + Rollerblade Wheels
-- **Clean Wheels**: (25%) Right-click → Requires Toothbrush + Water Bottle + Dish Cloth + Screwdriver
+- **Clean Wheels**: (25%) Right-click → Requires Toothbrush + Alcohol Wipes + Screwdriver
 
 ### Visual Feedback
 - **Context menu info**: Speed boost information tooltip

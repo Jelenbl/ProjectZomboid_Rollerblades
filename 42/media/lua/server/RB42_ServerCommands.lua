@@ -75,30 +75,21 @@ local function onClientCommand(module, command, playerObj, args)
   if command == "CleanWheels" then
     print("[RB42] CleanWheels command received for item ID: " .. tostring(args.rbId))
     
+    if inv:getCountTypeRecurse("Base.Screwdriver") <= 0 then 
+      print("[RB42] No screwdriver found")
+      return 
+    end
     if inv:getCountTypeRecurse("Base.Toothbrush") <= 0 then 
       print("[RB42] No toothbrush found")
       return 
     end
-    if inv:getCountTypeRecurse("Base.WaterBottle") <= 0 then 
-      print("[RB42] No water bottle found")
-      return 
-    end
-    if inv:getCountTypeRecurse("Base.DishCloth") <= 0 then 
-      print("[RB42] No dish cloth found")
+    if inv:getCountTypeRecurse("Base.AlcoholWipes") <= 0 then 
+      print("[RB42] No alcohol wipes found")
       return 
     end
 
-    -- Consume dish cloth (gets dirty)
-    consumeOne(inv, "Base.DishCloth")
-    
-    -- Reduce water in bottle
-    local waterBottle = inv:FindAndReturn("Base.WaterBottle")
-    if waterBottle and waterBottle.getUsedDelta then
-      waterBottle:setUsedDelta(waterBottle:getUsedDelta() - 0.1)
-      if waterBottle:getUsedDelta() <= 0 then
-        inv:Remove(waterBottle)
-      end
-    end
+    -- Consume AlcoholWipes (used up), keep Screwdriver and Toothbrush
+    consumeOne(inv, "Base.AlcoholWipes")
 
     -- Cleaning restores some wheels durability
     md.rb_wheels = math.min(RB42.Config.WheelsMax, (md.rb_wheels or RB42.Config.WheelsMax) + 8)
