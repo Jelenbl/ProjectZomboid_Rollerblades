@@ -18,10 +18,10 @@ RB42.Config = {
 
     -- Wear per tick (per 0.25s by default)
     Wear = {
-        HardWheels = 0.006,
-        SoftWheels = 0.012,
-        StairsWheels = 0.018,
-        BlockedWheels = 0.024,
+        HardWheels = 0.003,    -- was 0.006
+        SoftWheels = 0.006,    -- was 0.012
+        StairsWheels = 0.009,  -- was 0.018
+        BlockedWheels = 0.012, -- was 0.024
 
         HardBoots = 0.001,
         SoftBoots = 0.002,
