@@ -1,40 +1,19 @@
 module Rollerblades42
 {
-    recipe Craft_Rollerblades
+    craftRecipe Clean_Rollerblade_Wheels
     {
-        inputs
-        {
-            Base.Sneakers,
-            Base.ScrapMetal=2,
-            Base.DuctTape,
-            Base.Screws=4,
-        }
-
-        outputs
-        {
-            Rollerblades42.Rollerblades=1,
-        }
-
-        time = 80,
-    }
-
-    recipe Clean_Rollerblade_Wheels
-    {
-        inputs
-        {
-            Rollerblades42.Rollerblades,
-            Base.Screwdriver,
-            Base.Toothbrush,
-            Base.Grease,
-            Base.AlcoholWipes,
-        }
-
-        outputs
-        {
-            Rollerblades42.Rollerblades=1,
-        }
-
         time = 60,
-        
+        Tags = InHandCraft,
+        category = Maintenance,
+        inputs
+        {
+            item 1 [Rollerblades42.Rollerblades] mode:keep flags[ItemCount],
+            item 1 tags[base:screwdriver] mode:keep flags[MayDegradeVeryLight;NoBrokenItems],
+            item 1 [Base.Toothbrush] mode:keep,
+            item 1 [Base.AlcoholWipes] mode:destroy,
+        }
+        outputs
+        {
+        }
     }
 }

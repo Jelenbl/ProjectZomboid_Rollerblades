@@ -1,30 +1,19 @@
 module Rollerblades42
 {
-    recipe Replace_Rollerblade_Wheels
+    craftRecipe Clean_Rollerblade_Wheels
     {
-        keep Rollerblades42.Rollerblades,
-        keep Base.Screwdriver,
-        
-        Base.RollerbladeWheels,
-        
-        Result:Rollerblades42.Rollerblades,
-        OnCreate:RB42_OnReplaceWheels,
-        Time:60.0,
-        Category:Repair,
-    }
-
-    recipe Clean_Rollerblade_Wheels
-    {
-        keep Rollerblades42.Rollerblades,
-        keep Base.Screwdriver,
-        keep Base.Toothbrush,
-        
-        Base.Grease,
-        Base.AlcoholWipes,
-        
-        Result:Rollerblades42.Rollerblades,
-        OnCreate:RB42_OnCleanWheels,
-        Time:60.0,
-        Category:Repair,
+        time = 60,
+        Tags = InHandCraft,
+        category = Maintenance,
+        inputs
+        {
+            item 1 [Rollerblades42.Rollerblades] mode:keep flags[ItemCount],
+            item 1 tags[base:screwdriver] mode:keep flags[MayDegradeVeryLight;NoBrokenItems],
+            item 1 [Base.Toothbrush] mode:keep,
+            item 1 [Base.AlcoholWipes] mode:destroy,
+        }
+        outputs
+        {
+        }
     }
 }
