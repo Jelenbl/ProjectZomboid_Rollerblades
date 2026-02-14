@@ -29,14 +29,10 @@ local function doCleanWheels(playerObj, inv, rbItem)
   if isClient() then
     sendClientCommand(playerObj, "RB42", "CleanWheels", { rbId = rbItem:getID() })
   else
-    if countItem(inv, "Base.Toothbrush") <= 0 or countItem(inv, "Base.WaterBottle") <= 0 or countItem(inv, "Base.DishCloth") <= 0 then return end
-    local cloth = inv:FindAndReturn("Base.DishCloth")
-    if cloth then inv:Remove(cloth) end
-    local waterBottle = inv:FindAndReturn("Base.WaterBottle")
-    if waterBottle and waterBottle.getUsedDelta then
-      waterBottle:setUsedDelta(waterBottle:getUsedDelta() - 0.1)
-      if waterBottle:getUsedDelta() <= 0 then inv:Remove(waterBottle) end
-    end
+    if countItem(inv, "Base.Screwdriver") <= 0 or countItem(inv, "Base.Toothbrush") <= 0 or countItem(inv, "Base.AlcoholWipes") <= 0 then return end
+    -- Consume AlcoholWipes (used up), keep Screwdriver and Toothbrush
+    local wipes = inv:FindAndReturn("Base.AlcoholWipes")
+    if wipes then inv:Remove(wipes) end
     local md = rbItem:getModData()
     if md.rb_wheels == nil then md.rb_wheels = RB42.Config.WheelsMax end
     md.rb_wheels = math.min(RB42.Config.WheelsMax, md.rb_wheels + 8)
@@ -81,10 +77,9 @@ local function onFillInventoryContextMenu(player, context, items)
   local opt1 = context:addOption("Replace Rollerblade Wheels", playerObj, doReplaceWheels, inv, rbItem)
   opt1.notAvailable = not (hasWheels and hasScrewdriver)
   local hasToothbrush = countItem(inv, "Base.Toothbrush") > 0
-  local hasWaterBottle = countItem(inv, "Base.WaterBottle") > 0
-  local hasDishCloth = countItem(inv, "Base.DishCloth") > 0
+  local hasAlcoholWipes = countItem(inv, "Base.AlcoholWipes") > 0
   local opt2 = context:addOption("Clean Rollerblade Wheels", playerObj, doCleanWheels, inv, rbItem)
-  opt2.notAvailable = not (hasToothbrush and hasWaterBottle and hasDishCloth)
+  opt2.notAvailable = not (hasScrewdriver and hasToothbrush and hasAlcoholWipes)
 end
 
 Events.OnFillInventoryObjectContextMenu.Add(onFillInventoryContextMenu)
