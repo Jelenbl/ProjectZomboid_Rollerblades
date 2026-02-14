@@ -1,0 +1,40 @@
+module Rollerblades42
+{
+    recipe Craft_Rollerblades
+    {
+        inputs
+        {
+            Base.Sneakers,
+            Base.ScrapMetal=2,
+            Base.DuctTape,
+            Base.Screws=4,
+        }
+
+        outputs
+        {
+            Rollerblades42.Rollerblades=1,
+        }
+
+        time = 80,
+    }
+
+    recipe Clean_Rollerblade_Wheels
+    {
+        inputs
+        {
+            Rollerblades42.Rollerblades,
+            Base.Screwdriver,
+            Base.Toothbrush,
+            Base.Grease,
+            Base.AlcoholWipes,
+        }
+
+        outputs
+        {
+            Rollerblades42.Rollerblades=1,
+        }
+
+        time = 60,
+        
+    }
+}
