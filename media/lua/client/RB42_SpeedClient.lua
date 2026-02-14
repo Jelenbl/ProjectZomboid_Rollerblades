@@ -295,7 +295,11 @@ Events.OnPlayerUpdate.Add(function(player)
         
         -- XP GAINS SYSTEM
         -- Only grant XP when actually moving (not standing still)
-        if player and not player:isDead() and player:isMoving() then
+        -- Additional check: player must be truly moving (not just standing/turning)
+        local isActuallyMoving = player and not player:isDead() and player:isMoving() and 
+                                 (player:getX() ~= player:getLastX() or player:getY() ~= player:getLastY())
+        
+        if isActuallyMoving then
             xpAccumulator = xpAccumulator + 0.25  -- Each tick is ~0.25 seconds
             
             -- Every 60 seconds of skating, grant XP (very slow progression)
@@ -318,12 +322,19 @@ Events.OnPlayerUpdate.Add(function(player)
                 
                 xpAccumulator = 0  -- Reset accumulator
             end
+        else
+            -- Not moving - don't accumulate XP
+            xpAccumulator = 0
         end
         
         -- DURABILITY WEAR SYSTEM
         -- Degrade wheels and boots over time based on terrain type
         -- Only while moving; rates are per-second from Config.Wear
-        if player and not player:isDead() and player:isMoving() then
+        -- Additional check: player must be truly moving (not just standing/turning)
+        local isActuallyMoving = player and not player:isDead() and player:isMoving() and 
+                                 (player:getX() ~= player:getLastX() or player:getY() ~= player:getLastY())
+        
+        if isActuallyMoving then
             wearAccumulator = wearAccumulator + 0.25  -- Each tick is ~0.25 seconds
             
             -- Apply wear every 10 seconds of movement
@@ -374,12 +385,19 @@ Events.OnPlayerUpdate.Add(function(player)
                 
                 wearAccumulator = 0
             end
+        else
+            -- Not moving - don't accumulate wear
+            wearAccumulator = 0
         end
         
         -- ENDURANCE DRAIN SYSTEM
         -- Skating is more exhausting than normal movement (constant balancing)
         -- B42 uses Fatigue field directly on Stats (0.0 = fresh, 1.0 = exhausted)
-        if player and not player:isDead() and player:isMoving() then
+        -- Additional check: player must be truly moving (not just standing/turning)
+        local isActuallyMoving = player and not player:isDead() and player:isMoving() and 
+                                 (player:getX() ~= player:getLastX() or player:getY() ~= player:getLastY())
+        
+        if isActuallyMoving then
             local stats = player:getStats()
             if stats and stats.Fatigue ~= nil then
                 local fatigue = stats.Fatigue
