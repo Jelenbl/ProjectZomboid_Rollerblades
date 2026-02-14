@@ -81,7 +81,7 @@ Mod ID: Rollerblades42
 ### Maintenance
 1. **Right-click** rollerblades in inventory
 2. **Replace Wheels**: Use when worn (needs Screwdriver + Wheels)
-3. **Clean Wheels**: Restores some durability (needs Toothbrush + Water + Cloth)
+3. **Clean Wheels**: Restores some durability[25%] (needs Toothbrush + Screwdriver + Alcohol Wipes)
 
 ### Loot Locations
 
