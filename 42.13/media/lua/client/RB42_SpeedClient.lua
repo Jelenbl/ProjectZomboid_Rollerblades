@@ -241,6 +241,7 @@ end
 
 -- Main update loop - runs every frame
 Events.OnPlayerUpdate.Add(function(player)
+
     -- ULTRA AGGRESSIVE NULL CHECK - catch any invalid player immediately
     if not player then 
         print("[RB42 ERROR] Player is NIL in OnPlayerUpdate!")
@@ -482,21 +483,21 @@ Events.OnPlayerUpdate.Add(function(player)
         player:setVariable("RollerbladesRunSpeed", speedMult)
         player:setVariable("RollerbladesSpeed", speedMult)
         
--- REAL movement speed (not just animation)
-local pmd = player:getModData()
-if pmd.rb42_baseSpeedMod == nil then
-    pmd.rb42_baseSpeedMod = player:getSpeedMod() -- remember what it was before skates
-end
-player:setSpeedMod(pmd.rb42_baseSpeedMod * speedMult)
--- print("RB42 setSpeedMod ->", player:getSpeedMod())
+    -- REAL movement speed (not just animation)
+    local pmd = player:getModData()
+    if pmd.rb42_baseSpeedMod == nil then
+        pmd.rb42_baseSpeedMod = player:getSpeedMod() -- remember what it was before skates
+    end
+    player:setSpeedMod(pmd.rb42_baseSpeedMod * speedMult)
+    -- print("RB42 setSpeedMod ->", player:getSpeedMod())
 
-local square = player:getCurrentSquare()
-local floor = square and square:getFloor()
-local sprite = floor and floor:getSprite()
-local spriteName = sprite and sprite:getName() or "NO_SPRITE"
+    local square = player:getCurrentSquare()
+    local floor = square and square:getFloor()
+    local sprite = floor and floor:getSprite()
+    local spriteName = sprite and sprite:getName() or "NO_SPRITE"
 
--- print("RB42 floor=", spriteName, " speedMult=", speedMult)
--- REAL movement speed (not just animation)
+    -- print("RB42 floor=", spriteName, " speedMult=", speedMult)
+    -- REAL movement speed (not just animation)
 
 
 

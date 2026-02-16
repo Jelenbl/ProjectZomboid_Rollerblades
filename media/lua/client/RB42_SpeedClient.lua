@@ -111,50 +111,36 @@ local function getTerrainType(player)
         end
     end
     
-    -- Priority 3: Check floor tile for carpet/rugs
-    -- if square.getFloor then
-    --     local floor = square:getFloor()
-    --     if floor and floor.getSprite then
-    --         local sprite = floor:getSprite()
-    --         if sprite and sprite.getName then
-    --             local name = tostring(sprite:getName()):lower()
-    --             if name:find("carpet") or name:find("rug") then
-    --                 return "soft"
-    --             end
-    --         end
-    --     end
-    -- end
-    
     -- -- Default: Hard surface (concrete, asphalt, indoor floors)
     -- return "hard"
     -- Priority 3: Check floor tile (this is what your logs are printing)
-if square.getFloor then
-    local floor = square:getFloor()
-    if floor and floor.getSprite then
-        local sprite = floor:getSprite()
-        if sprite and sprite.getName then
-            local name = tostring(sprite:getName()):lower()
+    if square.getFloor then
+        local floor = square:getFloor()
+        if floor and floor.getSprite then
+            local sprite = floor:getSprite()
+            if sprite and sprite.getName then
+                local name = tostring(sprite:getName()):lower()
 
-            -- GRASS / DIRT / NATURAL
-            if name:find("blends_natural") or name:find("natural") or name:find("grass") or name:find("dirt") then
-                return "soft"
-            end
+                -- GRASS / DIRT / NATURAL
+                if name:find("blends_natural") or name:find("natural") or name:find("grass") or name:find("dirt") then
+                    return "soft"
+                end
 
-            -- ROADS / STREETS / ASPHALT / CONCRETE
-            if name:find("blends_street") or name:find("street") or name:find("asphalt") or name:find("concrete") then
-                return "hard"
-            end
+                -- ROADS / STREETS / ASPHALT / CONCRETE
+                if name:find("blends_street") or name:find("street") or name:find("asphalt") or name:find("concrete") then
+                    return "hard"
+                end
 
-            -- CARPET / RUGS (also soft)
-            if name:find("carpet") or name:find("rug") then
-                return "soft"
+                -- CARPET / RUGS (also soft)
+                if name:find("carpet") or name:find("rug") then
+                    return "soft"
+                end
             end
         end
     end
-end
 
--- Default: treat unknown as hard
-return "hard"
+    -- Default: treat unknown as hard
+    return "hard"
 
 end
 
@@ -288,18 +274,16 @@ Events.OnPlayerUpdate.Add(function(player)
                 lastFallCheck = stairsTimer
                 
                 -- Fall chance calculation
-                -- Base 1% chance per check on stairs (frequent stumbles)
                 -- Increased by 12% if running
                 -- Reduced by Nimble skill (0.1% per level, max -1% at level 10)
                 -- Increased by 5% if carrying heavy items
-                local fallChance = 2
+                local fallChance = RB42.Config.fallChanceOnStairsCheck
 
-                -- Nimble skill reduces fall chance (0.1% per level, max 1%)
+                -- Nimble skill reduces fall chance
                 if not player or player:isDead() then return end
                 local nimbleLevel = player:getPerkLevel(Perks.Nimble)
-                local nimbleReduction = math.min(nimbleLevel, 10) * 0.2  -- Max 1% reduction at level 10
+                local nimbleReduction = math.min(nimbleLevel, 10) * RB42.Config.reductionPerNimbleLevelForStairs  -- Max 2% reduction at level 10
                 fallChance = fallChance - nimbleReduction
-                print(string.format("[RB42] Fall chance on stairs: Base 1%% - Nimble %.1f%% = %.2f%%", nimbleReduction * 100, fallChance))
                 if player:isRunning() then
                     fallChance = fallChance + 12  -- 13% base + nimble modifier when running
                 end
@@ -321,6 +305,21 @@ Events.OnPlayerUpdate.Add(function(player)
             stairsTimer = 0
             lastFallCheck = 0
         end
+
+        -- Attacking also increases fall chance, even on non-stairs terrain (risk of losing balance)
+        fallChance = 0
+        if player:isAttacking() then
+            fallChance = RB42.Config.attackFallChancePerAttack
+            local nimbleLevel = player:getPerkLevel(Perks.Nimble)
+            local nimbleReduction = math.min(nimbleLevel, 10) * RB42.Config.reductionPerNimbleLevelForAttack  -- Max 1% reduction at level 10
+            fallChance = fallChance - nimbleReduction
+        end
+        if ZombRand(100) < fallChance then
+            fallOnStairs(player)
+            stairsTimer = 0  -- Reset timer after fall
+            lastFallCheck = 0
+            fallChance = 0  -- Reset fall chance after fall
+        end
         
         -- XP GAINS SYSTEM
         -- Only grant XP when actually moving (not standing still)
@@ -338,15 +337,12 @@ Events.OnPlayerUpdate.Add(function(player)
                 
                 -- Always grant Fitness XP while skating (any terrain)
                 -- Moving with weight on your legs = fitness training
-                xpSystem:AddXP(Perks.Fitness, 0.25)  -- 0.25 XP per 60 seconds of movement
+                xpSystem:AddXP(Perks.Fitness, RB42.Config.FitnessXpPerTick)  
                 
                 -- Grant Nimble XP when on stairs (balance training)
                 -- Nimble skill reduces fall chance
                 if terrain == "stairs" then
-                    xpSystem:AddXP(Perks.Nimble, 1)  -- 1 XP per 60 seconds on stairs
-                    print("[RB42] XP gained: +0.25 Fitness, +1 Nimble (stairs)")
-                else
-                    print("[RB42] XP gained: +0.25 Fitness")
+                    xpSystem:AddXP(Perks.Nimble, RB42.Config.NimbleXpPerStairsTick)  -- 0.4 XP per 60 seconds on stairs
                 end
                 
                 xpAccumulator = 0  -- Reset accumulator
