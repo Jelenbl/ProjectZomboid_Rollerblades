@@ -23,6 +23,11 @@ A fully-featured mod that adds functional rollerblades to Project Zomboid with t
 [*][b]Heavy inventory[/b] (+5% fall chance when carrying >20 weight)
 [/list]
 
+[b]Atack System[/b]
+[list]
+[*][b]Fall risk[/b]: 1% chance per Attack
+[*][b]Mitigation[/b]: 0.1% reduction per nimble level
+[/list]
 
 [b]Skill Progression[/b]
 [list]
@@ -43,6 +48,9 @@ A fully-featured mod that adds functional rollerblades to Project Zomboid with t
 [/list]
 
 [b]Maintenance System[/b]
+
+Actions are instant!
+
 [list]
 [*][b]Replace Wheels[/b]: Right-click → Requires Screwdriver + Rollerblade Wheels
 [*][b]Clean Wheels[/b]: (25%) Right-click → Requires Toothbrush + Alcohol Wipes + Screwdriver
@@ -191,7 +199,7 @@ RB42.Config = {
 [list]
 [*][b]Mod by[/b]: GingerVitis55
 [*][b]Build[/b]: Project Zomboid Build 42
-[*][b]Animation[/b]: RedChili
+[*][b]Animation Assitance[/b]: RedChili
 [/list]
 
 [h1]License[/h1]
@@ -208,4 +216,5 @@ Free to use and modify. Give credit if redistributing.
 
 Decreased Fall Chance on stairs
 Added texture to strapped shoes (actual rollerblades to come)
-Added Animation of Skating while "Running"
+Added Animation of Skating while "Running" - to be improved upon
+Added Fall Chance While Attacking

@@ -292,12 +292,12 @@ Events.OnPlayerUpdate.Add(function(player)
                 -- Increased by 12% if running
                 -- Reduced by Nimble skill (0.1% per level, max -1% at level 10)
                 -- Increased by 5% if carrying heavy items
-                local fallChance = 2
+                local fallChance = RB42.Config.fallChanceOnStairsCheck
 
                 -- Nimble skill reduces fall chance (0.1% per level, max 1%)
                 if not player or player:isDead() then return end
                 local nimbleLevel = player:getPerkLevel(Perks.Nimble)
-                local nimbleReduction = math.min(nimbleLevel, 10) * 0.2  -- Max 2% reduction at level 10
+                local nimbleReduction = math.min(nimbleLevel, 10) * RB42.Config.reductionPerNimbleLevelForStairs  -- Max 2% reduction at level 10
                 fallChance = fallChance - nimbleReduction
                 if player:isRunning() then
                     fallChance = fallChance + 12  -- 13% base + nimble modifier when running
@@ -319,6 +319,21 @@ Events.OnPlayerUpdate.Add(function(player)
             -- Not on stairs, reset timers
             stairsTimer = 0
             lastFallCheck = 0
+        end
+
+        -- Attacking also increases fall chance, even on non-stairs terrain (risk of losing balance)
+        fallChance = 0
+        if player:isAttacking() then
+            fallChance = RB42.Config.attackFallChancePerAttack
+            local nimbleLevel = player:getPerkLevel(Perks.Nimble)
+            local nimbleReduction = math.min(nimbleLevel, 10) * RB42.Config.reductionPerNimbleLevelForAttack  -- Max 1% reduction at level 10
+            fallChance = fallChance - nimbleReduction
+        end
+        if ZombRand(100) < fallChance then
+            fallOnStairs(player)
+            stairsTimer = 0  -- Reset timer after fall
+            lastFallCheck = 0
+            fallChance = 0  -- Reset fall chance after fall
         end
         
         -- XP GAINS SYSTEM

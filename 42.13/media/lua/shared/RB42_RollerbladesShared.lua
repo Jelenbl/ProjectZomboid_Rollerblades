@@ -9,6 +9,12 @@ RB42.Config = {
     SpeedStairs = 0.30,  -- Going up/down stairs (70% slower!)
     SpeedBlocked = 0.30,  -- Pushing through bushes/trees (70% slower!)
 
+    -- Nimble System
+    attackFallChancePerAttack = 1.00,  -- 1% increased fall chance per attack
+    reductionPerNimbleLevelForAttack = 0.10,     -- 0.1% reduction in fall chance per nimble level for an Attack
+    reductionPerNimbleLevelForStairs = 0.20,     -- 2% reduction in fall chance per nimble level on stairs
+    fallChanceOnStairsCheck = 2.0,  -- Base 2% chance to fall on stairs check
+    
     -- Carpet detection: floor sprite name contains any of these
     CarpetKeywords = { "carpet", "rug", "mat" },
 
