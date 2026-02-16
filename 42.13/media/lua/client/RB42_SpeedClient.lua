@@ -44,7 +44,7 @@ local function getTerrainType(player)
                     -- Use patterns so "tree" doesn't match inside "street"
                     if (objName:find("%f[%a]tree%f[%A]") or objName:find("%f[%a]tree$"))
                     or objName:find("bush") or objName:find("hedge") or objName:find("plant") then
-                        print("[RB42] BLOCKED by object: " .. objName)
+                        -- print("[RB42] BLOCKED by object: " .. objName)
                         return "blocked"
                     end
                 end
@@ -58,7 +58,7 @@ local function getTerrainType(player)
                         -- Use patterns so "tree" doesn't match inside "street"
                         if (spriteName:find("%f[%a]tree%f[%A]") or spriteName:find("%f[%a]tree$"))
                         or spriteName:find("bush") or spriteName:find("hedge") then
-                            print("[RB42] BLOCKED by sprite: " .. spriteName)
+                            -- print("[RB42] BLOCKED by sprite: " .. spriteName)
                             return "blocked"
                         end
                     end
@@ -70,7 +70,7 @@ local function getTerrainType(player)
                     -- Use patterns so "tree" doesn't match inside "street"
                     if (texName:find("%f[%a]tree%f[%A]") or texName:find("%f[%a]tree$"))
                     or texName:find("bush") or texName:find("hedge") then
-                        print("[RB42] BLOCKED by texture: " .. texName)
+                        -- print("[RB42] BLOCKED by texture: " .. texName)
                         return "blocked"
                     end
                 end
@@ -207,7 +207,7 @@ local function fallOnStairs(player)
             -- Very rare chance for fracture (only 2% chance)
             if ZombRand(100) < 2 then
                 bodyPart:setFractureTime(ZombRand(30, 45))  -- Short fracture time
-                print("[RB42] FRACTURED: " .. tostring(randomPart))
+                -- print("[RB42] FRACTURED: " .. tostring(randomPart))
             end
             
             -- Low chance for bleeding (10% chance, stops quickly)
@@ -236,7 +236,7 @@ local function fallOnStairs(player)
         end
     end
     
-    print("[RB42] Stumbled on stairs! Minor injuries.")
+    -- print("[RB42] Stumbled on stairs! Minor injuries.")
 end
 
 -- Main update loop - runs every frame
@@ -244,7 +244,7 @@ Events.OnPlayerUpdate.Add(function(player)
 
     -- ULTRA AGGRESSIVE NULL CHECK - catch any invalid player immediately
     if not player then 
-        print("[RB42 ERROR] Player is NIL in OnPlayerUpdate!")
+        -- print("[RB42 ERROR] Player is NIL in OnPlayerUpdate!")
         return 
     end
     if player:isDead() then 
@@ -309,18 +309,26 @@ Events.OnPlayerUpdate.Add(function(player)
 
         -- Attacking also increases fall chance, even on non-stairs terrain (risk of losing balance)
         fallChance = 0
-        if player:isAttacking() then
+        if player:isAttacking() and not isAttacking then
+            isAttacking = true
             fallChance = RB42.Config.attackFallChancePerAttack
             local nimbleLevel = player:getPerkLevel(Perks.Nimble)
             local nimbleReduction = math.min(nimbleLevel, 10) * RB42.Config.reductionPerNimbleLevelForAttack  -- Max 1% reduction at level 10
             fallChance = fallChance - nimbleReduction
+            something = ZombRand(100)
+            print("[RB42] Attack fall chance: " .. string.format("%.3f", fallChance) .. " | Roll: " .. something .. ")")
+            if something < fallChance then
+                fallOnStairs(player)
+                stairsTimer = 0  -- Reset timer after fall
+                lastFallCheck = 0
+                fallChance = 0  -- Reset fall chance after fall
+            end
         end
-        if ZombRand(100) < fallChance then
-            fallOnStairs(player)
-            stairsTimer = 0  -- Reset timer after fall
-            lastFallCheck = 0
-            fallChance = 0  -- Reset fall chance after fall
+
+        if not player:isAttacking() then
+            isAttacking = false
         end
+
         
         -- XP GAINS SYSTEM
         -- Only grant XP when actually moving (not standing still)
@@ -391,17 +399,17 @@ Events.OnPlayerUpdate.Add(function(player)
                     md.rb_boots = RB42.Clamp((md.rb_boots or RB42.Config.BootsMax) - (bootWear * 10), 0, RB42.Config.BootsMax)
                     
                     -- Log when durability gets low
-                    if md.rb_wheels <= 5 and md.rb_wheels > 0 then
-                        print("[RB42] WARNING: Wheels very worn! (" .. string.format("%.1f", md.rb_wheels) .. "/" .. RB42.Config.WheelsMax .. ")")
-                    end
-                    if md.rb_boots <= 10 then
-                        print("[RB42] WARNING: Boots very worn! (" .. string.format("%.1f", md.rb_boots) .. "/" .. RB42.Config.BootsMax .. ")")
-                    end
+                    -- if md.rb_wheels <= 5 and md.rb_wheels > 0 then
+                    --     print("[RB42] WARNING: Wheels very worn! (" .. string.format("%.1f", md.rb_wheels) .. "/" .. RB42.Config.WheelsMax .. ")")
+                    -- end
+                    -- if md.rb_boots <= 10 then
+                    --     print("[RB42] WARNING: Boots very worn! (" .. string.format("%.1f", md.rb_boots) .. "/" .. RB42.Config.BootsMax .. ")")
+                    -- end
                     
                     -- Wheels completely destroyed!
                     if md.rb_wheels <= 0 and not wheelsBlown then
                         wheelsBlown = true
-                        print("[RB42] WHEELS DESTROYED! Falling and reverting to normal speed.")
+                        -- print("[RB42] WHEELS DESTROYED! Falling and reverting to normal speed.")
                         fallOnStairs(player)  -- Dramatic fall
                         if player.Say then
                             player:Say("My rollerblade wheels are shot!")
@@ -504,18 +512,18 @@ Events.OnPlayerUpdate.Add(function(player)
 
         if speedMult ~= lastSpeedMult or not wasWearing then
             lastSpeedMult = speedMult
-            print("[RB42] Speed updated to: " .. speedMult .. "x")
+            -- print("[RB42] Speed updated to: " .. speedMult .. "x")
         end
         
         -- Log terrain changes for debugging
         if terrain ~= lastTerrain then
-            print("[RB42] Terrain: " .. terrain .. " | Speed: " .. speedMult .. "x")
+            -- print("[RB42] Terrain: " .. terrain .. " | Speed: " .. speedMult .. "x")
             lastTerrain = terrain
         end
         
         -- First time equipping rollerblades
         if not wasWearing then
-            print("[RB42] Rollerblades ON")
+            -- print("[RB42] Rollerblades ON")
             wasWearing = true
         end
     else
@@ -527,7 +535,7 @@ Events.OnPlayerUpdate.Add(function(player)
         
         -- Just took off rollerblades
         if wasWearing then
-            print("[RB42] Rollerblades OFF")
+            -- print("[RB42] Rollerblades OFF")
             wasWearing = false
             lastTerrain = nil
             lastSpeedMult = nil
