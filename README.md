@@ -166,12 +166,22 @@ Edit `42/media/lua/shared/RB42_RollerbladesShared.lua`:
 
 ```lua
 RB42.Config = {
-    SpeedHard    = 1.25,   -- Hard surfaces: 25% faster
+    SpeedHard    = 1.50,   -- Hard surfaces: 50% faster
     SpeedSoft    = 0.75,   -- Soft surfaces: 25% slower of skating speed
-    SpeedStairs  = 0.30,   -- Stairs: 70% slower
+    SpeedStairs  = 0.30,   -- Stairs: 50% slower
     SpeedBlocked = 0.30,   -- Vegetation: 70% slower
-    BootsMax  = 60,        -- Max boot durability
-    WheelsMax = 30,        -- Max wheel durability
+
+    -- Speed multipliers (used by our built-in fallback too)
+    SpeedHard = 1.50,
+    SpeedSoft = 0.75,
+    SpeedStairs = 0.30,  -- Going up/down stairs (70% slower!)
+    SpeedBlocked = 0.30,  -- Pushing through bushes/trees (70% slower!)
+
+    -- Nimble System
+    fallChanceOnStairsCheck = 2.0,  -- Base 2% chance to fall on stairs check
+    attackFallChancePerAttack = 10,  -- 10% increased fall chance per attack
+    reductionPerNimbleLevelForAttack = 1,     -- 1% reduction in fall chance per nimble level for an Attack
+    reductionPerNimbleLevelForStairs = 0.20,     -- 2% reduction in fall chance per nimble level on stairs
 }
 ```
 

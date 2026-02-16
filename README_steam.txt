@@ -25,8 +25,17 @@ A fully-featured mod that adds functional rollerblades to Project Zomboid with t
 
 [b]Atack System[/b]
 [list]
-[*][b]Fall risk[/b]: 1% chance per Attack
-[*][b]Mitigation[/b]: 0.1% reduction per nimble level
+[*][b]Fall risk[/b]: 10% chance per Attack
+[*][b]Mitigation[/b]: 1% reduction per nimble level
+[/list]
+
+[b]Fall Injury System[/b]
+[list]
+[*][b]Number of Injuries[/b]: 1-2
+[*][b]Wound Severity[/b]: 1-4
+[*][b]Fracture Chance[/b]: 2%
+[*][b]Bleeding Chance[/b]: 20%
+[*][b]Scratch Chance[/b]: 40%
 [/list]
 
 [b]Skill Progression[/b]
@@ -185,8 +194,8 @@ RB42.Config = {
 
     -- Nimble System
     fallChanceOnStairsCheck = 2.0,  -- Base 2% chance to fall on stairs check
-    attackFallChancePerAttack = 1.00,  -- 1% increased fall chance per attack
-    reductionPerNimbleLevelForAttack = 0.10,     -- 0.1% reduction in fall chance per nimble level for an Attack
+    attackFallChancePerAttack = 10,  -- 10% increased fall chance per attack
+    reductionPerNimbleLevelForAttack = 1,     -- 1% reduction in fall chance per nimble level for an Attack
     reductionPerNimbleLevelForStairs = 0.20,     -- 2% reduction in fall chance per nimble level on stairs
 }
 [/code]

@@ -174,11 +174,6 @@ local function fallOnStairs(player)
         player:setBumpType("stagger")
     end
     
-    -- Alternative: Try to trigger bump/stumble animation
-    if player.setBumpType then
-        player:setBumpType("stagger")
-    end
-    
     -- Very minor injuries from stairs stumble (just scratches and bruises)
     -- Random body parts get injured (mostly legs and arms)
     local bodyParts = {
@@ -189,7 +184,8 @@ local function fallOnStairs(player)
         BodyPartType.UpperLeg_L,
         BodyPartType.UpperLeg_R,
         BodyPartType.LowerLeg_L,
-        BodyPartType.LowerLeg_R
+        BodyPartType.LowerLeg_R,
+        BodyPartType.Head
     }
     
     -- Number of body parts injured (1 part, maybe 2)
