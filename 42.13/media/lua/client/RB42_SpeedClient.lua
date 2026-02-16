@@ -297,9 +297,8 @@ Events.OnPlayerUpdate.Add(function(player)
                 -- Nimble skill reduces fall chance (0.1% per level, max 1%)
                 if not player or player:isDead() then return end
                 local nimbleLevel = player:getPerkLevel(Perks.Nimble)
-                local nimbleReduction = math.min(nimbleLevel, 10) * 0.2  -- Max 1% reduction at level 10
+                local nimbleReduction = math.min(nimbleLevel, 10) * 0.2  -- Max 2% reduction at level 10
                 fallChance = fallChance - nimbleReduction
-                print(string.format("[RB42] Fall chance on stairs: Base 1%% - Nimble %.1f%% = %.2f%%", nimbleReduction * 100, fallChance))
                 if player:isRunning() then
                     fallChance = fallChance + 12  -- 13% base + nimble modifier when running
                 end

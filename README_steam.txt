@@ -17,19 +17,12 @@ A fully-featured mod that adds functional rollerblades to Project Zomboid with t
 
 [b]Stairs Danger System[/b]
 [list]
-[*][b]Fall risk[/b]: 2% chance per second on stairs (20% when running)
+[*][b]Fall risk[/b]: 2% chance per second on stairs (12% when running)
 [*][b]Minor injuries[/b]: 1-4 damage to limbs, rare fractures (2% chance)
-[*][b]Nimble skill reduces falls[/b]: Each level reduces fall chance by 1% (max 10% reduction)
+[*][b]Nimble skill reduces falls[/b]: Each level reduces fall chance by 0.20% (max 2% reduction)
 [*][b]Heavy inventory[/b] (+5% fall chance when carrying >20 weight)
 [/list]
 
-[b]Fall Chance[/b]
-[list]
-[*]Base 2% chance per check on stairs (frequent stumbles)
-[*]Increased by 12% if running
-[*]Reduced by Nimble skill (0.20% per level, max -2%)
-[*]Increased by 5% if carrying heavy items
-[/list]
 
 [b]Skill Progression[/b]
 [list]
@@ -171,7 +164,7 @@ A fully-featured mod that adds functional rollerblades to Project Zomboid with t
 Edit [i]42/media/lua/shared/RB42_RollerbladesShared.lua[/i]:
 [code]
 RB42.Config = {
-    SpeedHard    = 1.25,   -- Hard surfaces: 25% faster
+    SpeedHard    = 1.50,   -- Hard surfaces: 50% faster
     SpeedSoft    = 0.75,   -- Soft surfaces: 25% slower of skating speed
     SpeedStairs  = 0.30,   -- Stairs: 50% slower
     SpeedBlocked = 0.30,   -- Vegetation: 70% slower
@@ -204,9 +197,15 @@ RB42.Config = {
 [h1]License[/h1]
 Free to use and modify. Give credit if redistributing.
 
----
+---------------------------------------------------------
 
-[b]Version[/b]: 1.1
+[b]Version[/b]: 1.2
 [b]Build[/b]: 42+
 [b]Multiplayer[/b]: Should work
-[b]Last Updated[/b]: February 14, 2026
+[b]Last Updated[/b]: February 16, 2026
+
+---------------------------------------------------------
+
+Decreased Fall Chance on stairs
+Added texture to strapped shoes (actual rollerblades to come)
+Added Animation of Skating while "Running"
