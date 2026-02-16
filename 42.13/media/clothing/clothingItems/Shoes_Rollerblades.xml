@@ -1,14 +1,16 @@
-<?xml version="1.0" encoding="UTF-8"?>
+<?xml version="1.0" encoding="utf-8"?>
 <clothingItem>
-  <name>Shoes_Rollerblades</name>
-
-  <!-- Reuse an existing shoe model/rig slot -->
-  <model>Shoes_TrainerTINT</model>
-
-  <!-- IMPORTANT: BaseTextures are what get drawn on the player -->
-  <baseTextures>
-    <baseTexture>ClothingItems/Shoes_Rollerblades</baseTexture>
-  </baseTextures>
-
-  <allowRandomTint>false</allowRandomTint>
+  <m_MaleModel>skinned\clothes\M_ShoesFancy</m_MaleModel>
+  <m_FemaleModel>skinned\clothes\M_ShoesFancy</m_FemaleModel>
+  <m_GUID>e2f6c4a3-2d57-4f16-9a6c-7d7f2f0c6b12</m_GUID>
+  <m_Static>false</m_Static>
+  <m_AllowRandomHue>false</m_AllowRandomHue>
+  <m_AllowRandomTint>false</m_AllowRandomTint>
+  <m_AttachBone></m_AttachBone>
+  <textureChoices>clothes\Shoes_Socks_Textures\Shoes_Rollerblades</textureChoices>
+  <bodyLocation>Shoes</bodyLocation>
+  <coveredParts>
+    <coveredPart>Foot_L</coveredPart>
+    <coveredPart>Foot_R</coveredPart>
+  </coveredParts>
 </clothingItem>

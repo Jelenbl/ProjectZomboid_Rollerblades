@@ -8,16 +8,22 @@ Mod ID: Rollerblades42
 ## Features
 
 ### Dynamic Speed System
-- **Hard surfaces** (concrete, asphalt, indoor floors, streets): **+25% speed boost**
-- **Soft surfaces** (grass, vegetation, carpet): **Normal speed**
-- **Stairs**: **-50% speed** (dangerous!)
+- **Hard surfaces** (concrete, asphalt, indoor floors, streets): **+50% speed boost**
+- **Soft surfaces** (grass, vegetation, carpet): **25% speed**
+- **Stairs**: **-70% speed** (dangerous!)
 - **Blocked** (trees, bushes, hedges): **-70% speed** — pushing through vegetation is brutal
 
 ### Stairs Danger System
-- **Fall risk**: 8% chance per second on stairs (20% when running)
+- **Fall risk**: 2% chance per second on stairs (20% when running)
 - **Minor injuries**: 1-4 damage to limbs, rare fractures (2% chance)
 - **Nimble skill reduces falls**: Each level reduces fall chance by 1% (max 10% reduction)
 - **Heavy inventory** (+5% fall chance when carrying >20 weight)
+
+### Fall Chance
+- Base 2% chance per check on stairs (frequent stumbles)
+- Increased by 12% if running
+- Reduced by Nimble skill (0.20% per level, max -2%)
+- Increased by 5% if carrying heavy items
 
 ### Skill Progression
 - **Fitness XP**: Gain +0.25 XP per minute of skating (any terrain)
@@ -161,10 +167,9 @@ Edit `42/media/lua/shared/RB42_RollerbladesShared.lua`:
 ```lua
 RB42.Config = {
     SpeedHard    = 1.25,   -- Hard surfaces: 25% faster
-    SpeedSoft    = 1.00,   -- Soft surfaces: normal speed
-    SpeedStairs  = 0.50,   -- Stairs: 50% slower
+    SpeedSoft    = 0.75,   -- Soft surfaces: 25% slower of skating speed
+    SpeedStairs  = 0.30,   -- Stairs: 70% slower
     SpeedBlocked = 0.30,   -- Vegetation: 70% slower
-
     BootsMax  = 60,        -- Max boot durability
     WheelsMax = 30,        -- Max wheel durability
 }
@@ -186,6 +191,8 @@ RB42.Config = {
 
 - **Mod by**: GingerVitis55; 
 - **Build**: Project Zomboid Build 42
+- **Animation**: RedChili
+
 
 ## License
 

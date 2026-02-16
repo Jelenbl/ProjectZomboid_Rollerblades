@@ -112,21 +112,50 @@ local function getTerrainType(player)
     end
     
     -- Priority 3: Check floor tile for carpet/rugs
-    if square.getFloor then
-        local floor = square:getFloor()
-        if floor and floor.getSprite then
-            local sprite = floor:getSprite()
-            if sprite and sprite.getName then
-                local name = tostring(sprite:getName()):lower()
-                if name:find("carpet") or name:find("rug") then
-                    return "soft"
-                end
+    -- if square.getFloor then
+    --     local floor = square:getFloor()
+    --     if floor and floor.getSprite then
+    --         local sprite = floor:getSprite()
+    --         if sprite and sprite.getName then
+    --             local name = tostring(sprite:getName()):lower()
+    --             if name:find("carpet") or name:find("rug") then
+    --                 return "soft"
+    --             end
+    --         end
+    --     end
+    -- end
+    
+    -- -- Default: Hard surface (concrete, asphalt, indoor floors)
+    -- return "hard"
+    -- Priority 3: Check floor tile (this is what your logs are printing)
+if square.getFloor then
+    local floor = square:getFloor()
+    if floor and floor.getSprite then
+        local sprite = floor:getSprite()
+        if sprite and sprite.getName then
+            local name = tostring(sprite:getName()):lower()
+
+            -- GRASS / DIRT / NATURAL
+            if name:find("blends_natural") or name:find("natural") or name:find("grass") or name:find("dirt") then
+                return "soft"
+            end
+
+            -- ROADS / STREETS / ASPHALT / CONCRETE
+            if name:find("blends_street") or name:find("street") or name:find("asphalt") or name:find("concrete") then
+                return "hard"
+            end
+
+            -- CARPET / RUGS (also soft)
+            if name:find("carpet") or name:find("rug") then
+                return "soft"
             end
         end
     end
-    
-    -- Default: Hard surface (concrete, asphalt, indoor floors)
-    return "hard"
+end
+
+-- Default: treat unknown as hard
+return "hard"
+
 end
 
 -- State tracking variables
@@ -259,27 +288,27 @@ Events.OnPlayerUpdate.Add(function(player)
                 lastFallCheck = stairsTimer
                 
                 -- Fall chance calculation
-                -- Base 8% chance per check on stairs (frequent stumbles)
+                -- Base 1% chance per check on stairs (frequent stumbles)
                 -- Increased by 12% if running
-                -- Reduced by Nimble skill (1% per level, max -10%)
+                -- Reduced by Nimble skill (0.1% per level, max -1% at level 10)
                 -- Increased by 5% if carrying heavy items
-                local fallChance = 8
-                
-                -- Nimble skill reduces fall chance (training pays off!)
+                local fallChance = 2
+
+                -- Nimble skill reduces fall chance (0.1% per level, max 1%)
                 if not player or player:isDead() then return end
                 local nimbleLevel = player:getPerkLevel(Perks.Nimble)
-                local nimbleReduction = math.min(nimbleLevel, 10)  -- Max 10% reduction at level 10
+                local nimbleReduction = math.min(nimbleLevel, 10) * 0.2  -- Max 1% reduction at level 10
                 fallChance = fallChance - nimbleReduction
-                
+                print(string.format("[RB42] Fall chance on stairs: Base 1%% - Nimble %.1f%% = %.2f%%", nimbleReduction * 100, fallChance))
                 if player:isRunning() then
-                    fallChance = fallChance + 12  -- 20% base + nimble modifier when running
+                    fallChance = fallChance + 12  -- 13% base + nimble modifier when running
                 end
-                
+
                 local inventory = player:getInventory()
                 if inventory and inventory:getCapacityWeight() > 20 then
                     fallChance = fallChance + 5  -- Heavy load = less balance
                 end
-                
+
                 -- Roll the dice!
                 if ZombRand(100) < fallChance then
                     fallOnStairs(player)
@@ -457,6 +486,25 @@ Events.OnPlayerUpdate.Add(function(player)
         player:setVariable("RollerbladesRunSpeed", speedMult)
         player:setVariable("RollerbladesSpeed", speedMult)
         
+-- REAL movement speed (not just animation)
+local pmd = player:getModData()
+if pmd.rb42_baseSpeedMod == nil then
+    pmd.rb42_baseSpeedMod = player:getSpeedMod() -- remember what it was before skates
+end
+player:setSpeedMod(pmd.rb42_baseSpeedMod * speedMult)
+-- print("RB42 setSpeedMod ->", player:getSpeedMod())
+
+local square = player:getCurrentSquare()
+local floor = square and square:getFloor()
+local sprite = floor and floor:getSprite()
+local spriteName = sprite and sprite:getName() or "NO_SPRITE"
+
+-- print("RB42 floor=", spriteName, " speedMult=", speedMult)
+-- REAL movement speed (not just animation)
+
+
+
+
         if speedMult ~= lastSpeedMult or not wasWearing then
             lastSpeedMult = speedMult
             print("[RB42] Speed updated to: " .. speedMult .. "x")

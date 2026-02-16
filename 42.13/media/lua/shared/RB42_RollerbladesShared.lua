@@ -1,12 +1,12 @@
 RB42 = RB42 or {}
 
 RB42.Config = {
-    TickSeconds = 0.01,
+    TickSeconds = 0.25,
 
     -- Speed multipliers (used by our built-in fallback too)
-    SpeedHard = 1.25,
-    SpeedSoft = 1.00,
-    SpeedStairs = 0.50,
+    SpeedHard = 1.50,
+    SpeedSoft = 0.75,
+    SpeedStairs = 0.30,  -- Going up/down stairs (70% slower!)
     SpeedBlocked = 0.30,  -- Pushing through bushes/trees (70% slower!)
 
     -- Carpet detection: floor sprite name contains any of these
