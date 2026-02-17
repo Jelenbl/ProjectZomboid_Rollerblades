@@ -76,10 +76,19 @@ local function onFillInventoryContextMenu(player, context, items)
   local hasScrewdriver = countItem(inv, "Base.Screwdriver") > 0
   local opt1 = context:addOption("Replace Rollerblade Wheels", playerObj, doReplaceWheels, inv, rbItem)
   opt1.notAvailable = not (hasWheels and hasScrewdriver)
+  local replaceTooltip = ISToolTip:new()
+  replaceTooltip:initialise()
+  replaceTooltip.description = "<b>Requires:</b>\n- Rollerblade Wheels (consumed)\n- Screwdriver (kept)"
+  opt1.toolTip = replaceTooltip
+
   local hasToothbrush = countItem(inv, "Base.Toothbrush") > 0
   local hasAlcoholWipes = countItem(inv, "Base.AlcoholWipes") > 0
   local opt2 = context:addOption("Clean Rollerblade Wheels", playerObj, doCleanWheels, inv, rbItem)
   opt2.notAvailable = not (hasScrewdriver and hasToothbrush and hasAlcoholWipes)
+  local cleanTooltip = ISToolTip:new()
+  cleanTooltip:initialise()
+  cleanTooltip.description = "<b>Requires:</b>\n- Screwdriver (kept)\n- Toothbrush (kept)\n- AlcoholWipes (consumed)"
+  opt2.toolTip = cleanTooltip
 end
 
 Events.OnFillInventoryObjectContextMenu.Add(onFillInventoryContextMenu)

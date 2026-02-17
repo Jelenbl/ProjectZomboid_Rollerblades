@@ -1,13 +1,25 @@
 RB42 = RB42 or {}
 
 RB42.Config = {
-    TickSeconds = 0.01,
+    TickSeconds = 0.25,
+
+    noiseMultiplier = 1.2,  -- Base noise multiplier at 0 durability (150% noise)
 
     -- Speed multipliers (used by our built-in fallback too)
-    SpeedHard = 1.25,
-    SpeedSoft = 1.00,
-    SpeedStairs = 0.50,
+    SpeedHard = 1.50,
+    SpeedSoft = 0.75,
+    SpeedStairs = 0.30,  -- Going up/down stairs (70% slower!)
     SpeedBlocked = 0.30,  -- Pushing through bushes/trees (70% slower!)
+
+    -- Nimble System
+    fallChanceOnStairsCheck = 2.0,  -- Base 2% chance to fall on stairs check
+    attackFallChancePerAttack = 10,  -- Base 10% increased fall chance per attack
+    reductionPerNimbleLevelForAttack = 1,     -- 1% reduction in fall chance per nimble level for an Attack
+    reductionPerNimbleLevelForStairs = 0.20,     -- 2% reduction in fall chance per nimble level on stairs
+    
+    -- XP System
+    FitnessXpPerTick = 0.25,  -- XP per tick while moving on rollerblades (any terrain)
+    NimbleXpPerStairsTick = 0.4,  -- XP per tick while on stairs (balance training)
 
     -- Carpet detection: floor sprite name contains any of these
     CarpetKeywords = { "carpet", "rug", "mat" },
@@ -15,6 +27,19 @@ RB42.Config = {
     -- Durability pools (0..Max)
     BootsMax = 60,
     WheelsMax = 30,
+
+    -- Noise System (radius in tiles)
+    -- For reference: normal footsteps ~7 walk, ~8 run, ~11 sprint, ~3 sneak
+    -- Rollerblades are roughly 2x louder due to hard wheels
+    NoiseWalking    = 10,   -- Hard wheels rolling at walking pace
+    NoiseRunning    = 13,   -- Fast skating, very audible
+    NoiseSneaking   = 6,   -- Can't really sneak on wheels
+    NoiseSprinting  = 17,   -- Full speed, wheels screaming
+    NoiseStairs     = 14,   -- Clunking up/down stairs (overrides movement type)
+    NoiseBlocked    = 8,   -- Pushing through brush, slow but crunchy
+    NoiseTerrainHard = 1.2, -- Multiplier: louder on concrete/asphalt
+    NoiseTerrainSoft = 0.7, -- Multiplier: quieter on grass/dirt
+    NoiseVolumeRatio = 0.6, -- Volume = radius * this (lower = less attractive to zombies)
 
     -- Wear per tick (per 0.25s by default)
     Wear = {
@@ -35,9 +60,6 @@ RB42.Config = {
         NimbleReductionPerLevel = 0.06,
         MinMultiplier = 0.35,
     },
-
-    -- XP
-    NimbleXpPerStairsTick = 0.4,
 }
 
 RB42.Config.Repair = {

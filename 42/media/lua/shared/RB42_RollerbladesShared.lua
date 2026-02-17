@@ -1,13 +1,23 @@
 RB42 = RB42 or {}
 
 RB42.Config = {
-    TickSeconds = 0.01,
+    TickSeconds = 0.25,
 
     -- Speed multipliers (used by our built-in fallback too)
-    SpeedHard = 1.25,
-    SpeedSoft = 1.00,
-    SpeedStairs = 0.50,
+    SpeedHard = 1.50,
+    SpeedSoft = 0.75,
+    SpeedStairs = 0.30,  -- Going up/down stairs (70% slower!)
     SpeedBlocked = 0.30,  -- Pushing through bushes/trees (70% slower!)
+
+    -- Nimble System
+    fallChanceOnStairsCheck = 2.0,  -- Base 2% chance to fall on stairs check
+    attackFallChancePerAttack = 10,  -- Base 10% increased fall chance per attack
+    reductionPerNimbleLevelForAttack = 1,     -- 1% reduction in fall chance per nimble level for an Attack
+    reductionPerNimbleLevelForStairs = 0.20,     -- 2% reduction in fall chance per nimble level on stairs
+    
+    -- XP System
+    FitnessXpPerTick = 0.25,  -- XP per tick while moving on rollerblades (any terrain)
+    NimbleXpPerStairsTick = 0.4,  -- XP per tick while on stairs (balance training)
 
     -- Carpet detection: floor sprite name contains any of these
     CarpetKeywords = { "carpet", "rug", "mat" },
@@ -18,10 +28,10 @@ RB42.Config = {
 
     -- Wear per tick (per 0.25s by default)
     Wear = {
-        HardWheels = 0.006,
-        SoftWheels = 0.012,
-        StairsWheels = 0.018,
-        BlockedWheels = 0.024,
+        HardWheels = 0.003,    -- was 0.006
+        SoftWheels = 0.006,    -- was 0.012
+        StairsWheels = 0.009,  -- was 0.018
+        BlockedWheels = 0.012, -- was 0.024
 
         HardBoots = 0.001,
         SoftBoots = 0.002,

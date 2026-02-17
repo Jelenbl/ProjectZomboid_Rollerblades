@@ -4,12 +4,15 @@ module Rollerblades42
   {
     DisplayName = Rollerblades,
     Type = Clothing,
-    ClothingItem = Shoes_TrainerTINT,
+    ClothingItem = Shoes_Rollerblades, /* Shoes_TrainerTINT, */
     itemType = Clothing,
     DisplayCategory = Clothing,
     BodyLocation = Shoes,
     Icon = Rollerblades,
     Weight = 1.3,
+    StompPower = 4.0,
+    CanHaveHoles = false,
+    BloodLocation = Shoes,
     
     /* Encumbrance (required for tooltip) */
     Encumbrance = 1.3,

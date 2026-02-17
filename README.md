@@ -2,26 +2,37 @@
 
 A fully-featured mod that adds functional rollerblades to Project Zomboid with terrain-based speed mechanics, skill progression, and maintenance systems.
 
-Workshop ID: 3665841859
-Mod ID: Rollerblades42
+**Workshop ID:** 3665841859  
+**Mod ID:** Rollerblades42
 
 ## Features
 
 ### Dynamic Speed System
-- **Hard surfaces** (concrete, asphalt, indoor floors, streets): **+25% speed boost**
-- **Soft surfaces** (grass, vegetation, carpet): **Normal speed**
-- **Stairs**: **-50% speed** (dangerous!)
-- **Blocked** (trees, bushes, hedges): **-70% speed** — pushing through vegetation is brutal
+- **Hard surfaces** (concrete, asphalt, indoor floors, streets): _+50% speed boost_
+- **Soft surfaces** (grass, vegetation, carpet): _25% speed_
+- **Stairs**: _-70% speed_ (dangerous!)
+- **Blocked** (trees, bushes, hedges): _-70% speed_ — pushing through vegetation is brutal
 
 ### Stairs Danger System
-- **Fall risk**: 8% chance per second on stairs (20% when running)
-- **Minor injuries**: 1-4 damage to limbs, rare fractures (2% chance)
-- **Nimble skill reduces falls**: Each level reduces fall chance by 1% (max 10% reduction)
-- **Heavy inventory** (+5% fall chance when carrying >20 weight)
+- **Fall risk:** 2% chance per second on stairs (12% when running)
+- **Minor injuries:** 1-4 damage to limbs, rare fractures (2% chance)
+- **Nimble skill reduces falls:** Each level reduces fall chance by 0.20% (max 2% reduction)
+- **Heavy inventory:** (+5% fall chance when carrying >20 weight)
+
+### Attack System
+- **Fall risk:** 10% chance per Attack
+- **Mitigation:** 1% reduction per nimble level
+
+### Fall Injury System
+- **Number of Injuries:** 1-2
+- **Wound Severity:** 1-4
+- **Fracture Chance:** 2%
+- **Bleeding Chance:** 20%
+- **Scratch Chance:** 40%
 
 ### Skill Progression
-- **Fitness XP**: Gain +0.25 XP per minute of skating (any terrain)
-- **Nimble XP**: Gain +1 XP per minute of skating on stairs
+- **Fitness XP:** Gain +0.25 XP per minute of skating (any terrain)
+- **Nimble XP:** Gain +1 XP per minute of skating on stairs
 - **Only while moving** — standing still doesn't grant XP
 
 ### Fatigue System
@@ -31,38 +42,53 @@ Mod ID: Rollerblades42
   - Stairs: additional 1.75x multiplier on top
   - Blocked terrain: additional 2.5x multiplier on top
 
+### Noise System
+Rollerblades now generate realistic movement noise that attracts nearby zombies. Noise scales with your speed and the surface you're skating on. Hard surfaces like concrete and asphalt are louder, while grass and dirt dampen the sound. Sneaking on wheels is possible but still noisier than regular footwear — plan your routes carefully.
+
+
+| Movement | Normal | Rollerblade |
+| -------- | ------ | ----------- |
+| Walking  |   ~7   |      10     |
+| Running  |   ~8   |      13     |
+| Sprinting  |   ~11   |      17     |
+| Sneaking  |   ~3   |      6     |
+| Stairs  |   -   |      14     |
+| Blocked  |   -   |      8     |
+
+
 ### Maintenance System
-- **Replace Wheels**: Right-click → Requires Screwdriver + Rollerblade Wheels
-- **Clean Wheels**: (25%) Right-click → Requires Toothbrush + Alcohol Wipes + Screwdriver
+Actions are instant!
+- **Replace Wheels:** Right-click → Requires Screwdriver + Rollerblade Wheels
+- **Clean Wheels:** (25%) Right-click → Requires Toothbrush + Alcohol Wipes + Screwdriver
 
 ### Visual Feedback
-- **Context menu info**: Speed boost information tooltip
-- **Character says**: "Replaced rollerblade wheels!" / "Cleaned rollerblade wheels!"
+- **Context menu info:** Speed boost information tooltip
+- **Character says:** "Replaced rollerblade wheels!" / "Cleaned rollerblade wheels!"
 
 ## Items
 
 ### Rollerblades
-- **Type**: Clothing (Shoes slot)
-- **Weight**: 1.3
-- **Speed Modifier**: +25% run speed (base, on hard terrain)
-- **Protection**: 100 scratch defense, 100 bite defense
-- **Durability**: Boots (60 max), Wheels (30 max)
+- **Type:** Clothing (Shoes slot)
+- **Weight:** 1.3
+- **Speed Modifier:** +25% run speed (base, on hard terrain)
+- **Protection:** 100 scratch defense, 100 bite defense
+- **Durability:** Boots (60 max), Wheels (30 max)
 
 ### Rollerblade Wheels
-- **Type**: Crafting item
-- **Weight**: 0.3
-- **Use**: Replace worn wheels on rollerblades
+- **Type:** Crafting item
+- **Weight:** 0.3
+- **Use:** Replace worn wheels on rollerblades
 
 ## How to Use
 
 ### Getting Started
-1. **Find rollerblades naturally**:
+1. **Find rollerblades naturally:**
    - **Sport stores** (most common)
    - **Clothing stores** (shoes section)
    - **Homes** (wardrobes, closets, especially kid's rooms)
    - **Garages/sheds** (rare, old rollerblades)
    - **Gym lockers**
-2. **OR spawn them**: `/additem Rollerblades42.Rollerblades`
+2. **OR spawn them:** `/additem Rollerblades42.Rollerblades`
 3. **Equip them** in your Shoes slot
 4. **Skate around!** Speed varies by terrain
 
@@ -73,17 +99,17 @@ Mod ID: Rollerblades42
 - **Closets** (sports equipment storage)
 
 ### Skating Tips
-- **Best on**: Roads, parking lots, indoor floors, sidewalks
-- **Slower on**: Grass, dirt, carpet
-- **Avoid**: Trees and bushes (nearly impassable!)
-- **Dangerous on**: Stairs (high fall risk!)
+- **Best on:** Roads, parking lots, indoor floors, sidewalks
+- **Slower on:** Grass, dirt, carpet
+- **Avoid:** Trees and bushes (nearly impassable!)
+- **Dangerous on:** Stairs (high fall risk!)
 
 ### Maintenance
-1. **Right-click** rollerblades in inventory
-2. **Replace Wheels**: Use when worn (needs Screwdriver + Wheels)
-3. **Clean Wheels**: Restores some durability[25%] (needs Toothbrush + Screwdriver + Alcohol Wipes)
+1. Right-click rollerblades in inventory
+2. Replace Wheels: Use when worn (needs Screwdriver + Wheels)
+3. Clean Wheels: Restores some durability [25%] (needs Toothbrush + Screwdriver + Alcohol Wipes)
 
-### Loot Locations
+## Loot Locations
 
 **Rollerblades** can be found in:
 - 🏅 **Sport stores** (shoes section) — Most common (8-10% spawn rate)
@@ -104,96 +130,41 @@ Mod ID: Rollerblades42
 
 ## Technical Details
 
-### Animation System
-Uses custom animation XMLs (`walk_rollerblades.xml`, `run_rollerblades.xml`) with speed driven through `m_Scalar`:
-- `RollerbladesActive` (bool) — Enables/disables custom rollerblade animations
-- `RollerbladesSpeed` (float) — Speed multiplier applied per-frame via `m_Scalar`
-
 ### Terrain Detection
-Client-side detection in priority order:
-1. **Blocked**: Objects with tree/bush/hedge in name (word-boundary matched — won't false-positive on "street")
-2. **Stairs**: `square:HasStairs()`
-3. **Soft**: Vegetation sprite properties/names, carpet/rug floor tiles
+1. **Blocked:** Objects with tree/bush/hedge in name (word-boundary matched — won't false-positive on "street")
+2. **Stairs:** square:HasStairs()
+3. **Soft:** Vegetation sprite properties/names, carpet/rug floor tiles
 4. **Hard** (default): Everything else (concrete, asphalt, indoor floors, streets)
 
-### B42 API Notes
-- Stats use **direct field access** (`stats.Fatigue`, `stats.Stress`, `stats.Panic`) — not getter/setter methods
-- Speed is driven through animation `m_Scalar` (read per-frame) rather than `m_SpeedScale` (read on state entry)
-
-## File Structure
-
-```
-Rollerblades42/
-  42/
-    mod.info                                    # Mod metadata
-    media/
-      AnimSets/player/
-        movement/walk_rollerblades.xml          # Walk animation with speed scalar
-        run/run_rollerblades.xml                # Run animation with speed scalar
-      clothing/clothingItems/
-        Shoes_Rollerblades.xml                  # Clothing visual definition
-      lua/
-        client/
-          RB42_ContextMenu.lua                  # Right-click menu (Replace/Clean wheels)
-          RB42_SpeedClient.lua                  # Terrain detection, speed, falls, XP, fatigue
-          RB42_DebugDisplay.lua                 # Debug HUD overlay
-          RB42_DebugItemListFix.lua             # B42 item list crash patch
-        server/
-          RB42_Distributions.lua                # Loot table entries
-          RB42_RecipesServer.lua                # Clean wheels recipe callback
-          RB42_RollerbladesServer.lua           # Server initialization
-          RB42_ServerCommands.lua               # MP command handlers
-          RB42_WheelsServer.lua                 # Replace wheels recipe callback
-          RB42_WornTick.lua                     # Periodic durability init
-        shared/
-          RB42_RollerbladesShared.lua            # Config & shared utilities
-      scripts/
-        RB42_Items.txt                          # Item definitions
-        RB42_Recipes.txt                        # Crafting recipes
-      textures/ClothingItems/                   # Rollerblade textures
-  README.md                                     # This file
-```
-
-## Configuration
-
-Edit `42/media/lua/shared/RB42_RollerbladesShared.lua`:
-
-```lua
-RB42.Config = {
-    SpeedHard    = 1.25,   -- Hard surfaces: 25% faster
-    SpeedSoft    = 1.00,   -- Soft surfaces: normal speed
-    SpeedStairs  = 0.50,   -- Stairs: 50% slower
-    SpeedBlocked = 0.30,   -- Vegetation: 70% slower
-
-    BootsMax  = 60,        -- Max boot durability
-    WheelsMax = 30,        -- Max wheel durability
-}
-```
-
 ## Known Issues / TODO
-
-- [ ] **`ClothingItem = Shoes_TrainerTINT`** in item script may skip custom `Shoes_Rollerblades.xml`
-- [ ] Custom 3D rollerblade models
-- [ ] Designed for MP - untested though
+- Custom 3D rollerblade models
+- Designed for MP - untested though
 
 ## Known Limitations
-
-1. **Visual**: Rollerblades currently appear as trainers (vanilla shoe model)
-2. **Multiplayer**: Tested in single-player; multiplayer should work via server commands
-3. **Performance**: Updates every frame, optimized but monitor FPS
+- **Visual:** Rollerblades currently appear as trainers (vanilla shoe model)
+- **Multiplayer:** Tested in single-player; multiplayer should work via server commands
+- **Performance:** Updates every frame, optimized but monitor FPS
 
 ## Credits
-
-- **Mod by**: GingerVitis55; 
-- **Build**: Project Zomboid Build 42
+- **Mod by:** GingerVitis55
+- **Build:** Project Zomboid Build 42
+- **Animation Assistance:** RedChili
 
 ## License
-
 Free to use and modify. Give credit if redistributing.
 
 ---
 
-**Version**: 1.1
-**Build**: 42+
-**Multiplayer**: Should work
-**Last Updated**: February 14, 2026
+**Version:** 1.2  
+**Build:** 42+  
+**Multiplayer:** Should work  
+**Last Updated:** February 16, 2026
+
+---
+
+Decreased Fall Chance on stairs  
+Added texture to strapped shoes (actual rollerblades to come)  
+Added Animation of Skating while "Running" - to be improved upon  
+Added Fall Chance While Attacking
+Added Noise Levels
+

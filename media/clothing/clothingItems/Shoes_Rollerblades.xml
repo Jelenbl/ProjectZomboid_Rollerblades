@@ -1,16 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
 <clothingItem>
-    <m_MaleModel>Shoes_TrainerTINT</m_MaleModel>
-    <m_FemaleModel>Shoes_TrainerTINT</m_FemaleModel>
-    <m_GUID>e2f6c4a3-2d57-4f16-9a6c-7d7f2f0c6b12</m_GUID>
-    <m_Static>false</m_Static>
-    <m_AllowRandomTint>false</m_AllowRandomTint>
-    <m_AttachBone>Bip01_L_Foot</m_AttachBone>
-    <m_AttachBone>Bip01_R_Foot</m_AttachBone>
-    <textureChoices>
-        <textureChoice>
-            <m_Name>Shoes_Rollerblades</m_Name>
-            <m_Texture>ClothingItems/Shoes_Rollerblades</m_Texture>
-        </textureChoice>
-    </textureChoices>
+  <m_MaleModel>skinned\clothes\M_ShoesFancy</m_MaleModel>
+  <m_FemaleModel>skinned\clothes\M_ShoesFancy</m_FemaleModel>
+  <m_GUID>e2f6c4a3-2d57-4f16-9a6c-7d7f2f0c6b12</m_GUID>
+  <m_Static>false</m_Static>
+  <m_AllowRandomHue>false</m_AllowRandomHue>
+  <m_AllowRandomTint>false</m_AllowRandomTint>
+  <m_AttachBone></m_AttachBone>
+  <textureChoices>clothes\Shoes_Socks_Textures\Shoes_Rollerblades</textureChoices>
+  <bodyLocation>Shoes</bodyLocation>
+  <coveredParts>
+    <coveredPart>Foot_L</coveredPart>
+    <coveredPart>Foot_R</coveredPart>
+  </coveredParts>
 </clothingItem>
