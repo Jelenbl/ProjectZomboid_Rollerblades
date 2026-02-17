@@ -1,3 +1,5 @@
+[b]Pre-Update Notes 2/17 [/b]
+
 [b][u]Rollerblades Mod for Project Zomboid Build 42[/u][/b]
 
 A fully-featured mod that adds functional rollerblades to Project Zomboid with terrain-based speed mechanics, skill progression, and maintenance systems.
@@ -216,13 +218,6 @@ Actions are instant!
 
 [h1]Technical Details[/h1]
 
-[b]Animation System[/b]
-[list]
-[*]Uses custom animation XMLs (walk_rollerblades.xml, run_rollerblades.xml) with speed driven through m_Scalar
-[*]RollerbladesActive (bool) — Enables/disables custom rollerblade animations
-[*]RollerbladesSpeed (float) — Speed multiplier applied per-frame via m_Scalar
-[/list]
-
 [b]Terrain Detection[/b]
 [list=1]
 [*][b]Blocked[/b]: Objects with tree/bush/hedge in name (word-boundary matched — won't false-positive on "street")
@@ -231,48 +226,13 @@ Actions are instant!
 [*][b]Hard[/b] (default): Everything else (concrete, asphalt, indoor floors, streets)
 [/list]
 
-[b]B42 API Notes[/b]
-[list]
-[*]Stats use direct field access (stats.Fatigue, stats.Stress, stats.Panic) — not getter/setter methods
-[*]Speed is driven through animation m_Scalar (read per-frame) rather than m_SpeedScale (read on state entry)
-[/list]
-
-[h1]Configuration[/h1]
-Edit [i]42/media/lua/shared/RB42_RollerbladesShared.lua[/i]:
-[code]
-RB42.Config = {
-    SpeedHard    = 1.50,   -- Hard surfaces: 50% faster
-    SpeedSoft    = 0.75,   -- Soft surfaces: 25% slower of skating speed
-    SpeedStairs  = 0.30,   -- Stairs: 50% slower
-    SpeedBlocked = 0.30,   -- Vegetation: 70% slower
-
-    -- Speed multipliers (used by our built-in fallback too)
-    SpeedHard = 1.50,
-    SpeedSoft = 0.75,
-    SpeedStairs = 0.30,  -- Going up/down stairs (70% slower!)
-    SpeedBlocked = 0.30,  -- Pushing through bushes/trees (70% slower!)
-
-    -- Nimble System
-    fallChanceOnStairsCheck = 2.0,  -- Base 2% chance to fall on stairs check
-    attackFallChancePerAttack = 10,  -- 10% increased fall chance per attack
-    reductionPerNimbleLevelForAttack = 1,     -- 1% reduction in fall chance per nimble level for an Attack
-    reductionPerNimbleLevelForStairs = 0.20,     -- 2% reduction in fall chance per nimble level on stairs
-}
-[/code]
-
 [h1]Known Issues / TODO[/h1]
 [list]
-[*][b]ClothingItem = Shoes_TrainerTINT[/b] in item script may skip custom Shoes_Rollerblades.xml
 [*]Custom 3D rollerblade models
 [*]Designed for MP - untested though
+[*]Make animation smoother
 [/list]
 
-[h1]Known Limitations[/h1]
-[list]
-[*][b]Visual[/b]: Rollerblades currently appear as trainers (vanilla shoe model)
-[*][b]Multiplayer[/b]: Tested in single-player; multiplayer should work via server commands
-[*][b]Performance[/b]: Updates every frame, optimized but monitor FPS
-[/list]
 
 [h1]Credits[/h1]
 [list]
@@ -293,7 +253,7 @@ Free to use and modify. Give credit if redistributing.
 
 ---------------------------------------------------------
 
-[h1]Changelog[/h1]
+[h1]Pre Relase Notes:[/h1]
 
 [b]v1.3[/b]
 [list]
@@ -305,11 +265,8 @@ Free to use and modify. Give credit if redistributing.
 [*]10% XP boost to Fitness and Nimble
 [*]Start with Rollerblades
 [/list]
-[*]Removed "WIP" from mod name
-[/list]
-
-[b]v1.2[/b]
 [list]
+[*]Removed "WIP" from mod name
 [*]Decreased Fall Chance on stairs
 [*]Added texture to strapped shoes (actual rollerblades to come)
 [*]Added Animation of Skating while "Running" - to be improved upon

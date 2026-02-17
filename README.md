@@ -181,8 +181,6 @@ Free to use and modify. Give credit if redistributing.
   - 10% XP boost to Fitness and Nimble
   - Start with Rollerblades
 - Removed "WIP" from mod name
-
-### v1.2
 - Decreased Fall Chance on stairs
 - Added texture to strapped shoes (actual rollerblades to come)
 - Added Animation of Skating while "Running" - to be improved upon
