@@ -3,6 +3,8 @@ RB42 = RB42 or {}
 RB42.Config = {
     TickSeconds = 0.25,
 
+    noiseMultiplier = 1.2,  -- Base noise multiplier at 0 durability (150% noise)
+
     -- Speed multipliers (used by our built-in fallback too)
     SpeedHard = 1.50,
     SpeedSoft = 0.75,
@@ -18,6 +20,7 @@ RB42.Config = {
     -- XP System
     FitnessXpPerTick = 0.25,  -- XP per tick while moving on rollerblades (any terrain)
     NimbleXpPerStairsTick = 0.4,  -- XP per tick while on stairs (balance training)
+    TraitXpBoost = 1.1,  -- 10% XP boost for Rollerblader trait
 
     -- Carpet detection: floor sprite name contains any of these
     CarpetKeywords = { "carpet", "rug", "mat" },
@@ -25,6 +28,19 @@ RB42.Config = {
     -- Durability pools (0..Max)
     BootsMax = 60,
     WheelsMax = 30,
+
+    -- Noise System (radius in tiles)
+    -- For reference: normal footsteps ~7 walk, ~8 run, ~11 sprint, ~3 sneak
+    -- Rollerblades are roughly 2x louder due to hard wheels
+    NoiseWalking    = 10,   -- Hard wheels rolling at walking pace
+    NoiseRunning    = 13,   -- Fast skating, very audible
+    NoiseSneaking   = 6,   -- Can't really sneak on wheels
+    NoiseSprinting  = 17,   -- Full speed, wheels screaming
+    NoiseStairs     = 14,   -- Clunking up/down stairs (overrides movement type)
+    NoiseBlocked    = 8,   -- Pushing through brush, slow but crunchy
+    NoiseTerrainHard = 1.2, -- Multiplier: louder on concrete/asphalt
+    NoiseTerrainSoft = 0.7, -- Multiplier: quieter on grass/dirt
+    NoiseVolumeRatio = 0.6, -- Volume = radius * this (lower = less attractive to zombies)
 
     -- Wear per tick (per 0.25s by default)
     Wear = {
@@ -45,9 +61,6 @@ RB42.Config = {
         NimbleReductionPerLevel = 0.06,
         MinMultiplier = 0.35,
     },
-
-    -- XP
-    NimbleXpPerStairsTick = 0.4,
 }
 
 RB42.Config.Repair = {

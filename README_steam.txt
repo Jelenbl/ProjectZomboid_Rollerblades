@@ -7,6 +7,16 @@ A fully-featured mod that adds functional rollerblades to Project Zomboid with t
 
 [h1]Features[/h1]
 
+[b]Rollerblader Trait (NEW!)[/b]
+A 3-point positive trait that gives you a head start on skating:
+[list]
+[*][b]25% less fatigue drain[/b] while skating
+[*][b]50% less fall chance[/b] on stairs and while attacking
+[*][b]20% slower durability loss[/b] on wheels and boots
+[*][b]10% XP boost[/b] to Fitness and Nimble while skating
+[*][b]Start with Rollerblades[/b] — no need to find them!
+[/list]
+
 [b]Dynamic Speed System[/b]
 [list]
 [*][b]Hard surfaces[/b] (concrete, asphalt, indoor floors, streets): [color=green]+50% speed boost[/color]
@@ -23,7 +33,7 @@ A fully-featured mod that adds functional rollerblades to Project Zomboid with t
 [*][b]Heavy inventory[/b] (+5% fall chance when carrying >20 weight)
 [/list]
 
-[b]Atack System[/b]
+[b]Attack System[/b]
 [list]
 [*][b]Fall risk[/b]: 10% chance per Attack
 [*][b]Mitigation[/b]: 1% reduction per nimble level
@@ -42,6 +52,7 @@ A fully-featured mod that adds functional rollerblades to Project Zomboid with t
 [list]
 [*][b]Fitness XP[/b]: Gain +0.25 XP per minute of skating (any terrain)
 [*][b]Nimble XP[/b]: Gain +1 XP per minute of skating on stairs
+[*][b]Trait XP Boost[/b]: +10% XP if you have the Rollerblader trait
 [*][b]Only while moving[/b] — standing still doesn't grant XP
 [/list]
 
@@ -275,14 +286,33 @@ Free to use and modify. Give credit if redistributing.
 
 ---------------------------------------------------------
 
-[b]Version[/b]: 1.2
+[b]Version[/b]: 1.3
 [b]Build[/b]: 42+
 [b]Multiplayer[/b]: Should work
-[b]Last Updated[/b]: February 16, 2026
+[b]Last Updated[/b]: February 17, 2026
 
 ---------------------------------------------------------
 
-Decreased Fall Chance on stairs
-Added texture to strapped shoes (actual rollerblades to come)
-Added Animation of Skating while "Running" - to be improved upon
-Added Fall Chance While Attacking
+[h1]Changelog[/h1]
+
+[b]v1.3[/b]
+[list]
+[*]Added [b]Rollerblader Trait[/b] (3 points):
+[list]
+[*]25% less fatigue drain while skating
+[*]50% less fall chance on stairs and while attacking
+[*]20% slower durability loss on wheels and boots
+[*]10% XP boost to Fitness and Nimble
+[*]Start with Rollerblades
+[/list]
+[*]Removed "WIP" from mod name
+[/list]
+
+[b]v1.2[/b]
+[list]
+[*]Decreased Fall Chance on stairs
+[*]Added texture to strapped shoes (actual rollerblades to come)
+[*]Added Animation of Skating while "Running" - to be improved upon
+[*]Added Fall Chance While Attacking
+[*]Added Noise Levels
+[/list]

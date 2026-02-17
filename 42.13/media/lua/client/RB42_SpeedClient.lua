@@ -21,6 +21,7 @@ local wearAccumulator = 0
 local noiseAccumulator = 0
 local wheelsBlown = false
 local isAttacking = false
+local stoppedTimer = 0  -- Tracks how long player has been stationary
 
 -- ============================================================
 -- Utility: Check if player is wearing rollerblades
@@ -213,7 +214,7 @@ end
 -- Subsystem: Stair fall chance
 -- Uses outer stairsTimer/lastFallCheck via closure
 -- ============================================================
-local function checkStairFall(player)
+local function checkStairFall(player, playerHasTrait)
     local fallChance = RB42.Config.fallChanceOnStairsCheck
     local nimbleLevel = player:getPerkLevel(Perks.Nimble)
     local nimbleReduction = math.min(nimbleLevel, 10) * RB42.Config.reductionPerNimbleLevelForStairs
@@ -228,6 +229,11 @@ local function checkStairFall(player)
         fallChance = fallChance + 5
     end
 
+    -- Apply 50% fall chance reduction if player has Rollerblader trait
+    if playerHasTrait then
+        fallChance = fallChance * 0.5
+    end
+
     if ZombRand(100) < fallChance then
         fallOnStairs(player)
         stairsTimer = 0
@@ -238,11 +244,16 @@ end
 -- ============================================================
 -- Subsystem: Attack fall chance
 -- ============================================================
-local function checkAttackFall(player)
+local function checkAttackFall(player, playerHasTrait)
     local fallChance = RB42.Config.attackFallChancePerAttack
     local nimbleLevel = player:getPerkLevel(Perks.Nimble)
     local nimbleReduction = math.min(nimbleLevel, 10) * RB42.Config.reductionPerNimbleLevelForAttack
     fallChance = fallChance - nimbleReduction
+
+    -- Apply 50% fall chance reduction if player has Rollerblader trait
+    if playerHasTrait then
+        fallChance = fallChance * 0.5
+    end
 
     if ZombRand(100) < fallChance then
         fallOnStairs(player)
@@ -252,18 +263,26 @@ end
 -- ============================================================
 -- Subsystem: XP gains
 -- Uses outer xpAccumulator via closure
+-- Applies trait bonus if player has Rollerblader trait
 -- ============================================================
-local function updateXP(player, terrain)
+local function updateXP(player, playerHasTrait, terrain)
+    
     xpAccumulator = xpAccumulator + 0.25
-
+    -- print("[RB42 SpeedClient] XP accumulator:", xpAccumulator, "Player has trait:", playerHasTrait, "Terrain:", terrain)
     if xpAccumulator >= 60.0 then
+        -- print("[RB42 SpeedClient] Updating XP. Player has trait:", playerHasTrait, "Terrain:", terrain)
         local xpSystem = player:getXp()
         if not xpSystem then return end
 
-        xpSystem:AddXP(Perks.Fitness, RB42.Config.FitnessXpPerTick)
+        -- Check for Rollerblader trait for XP boost (safe call to prevent crash if trait not found)
+        local xpMult = 1.0
+        if playerHasTrait then
+            xpMult = RB42.Config.TraitXpBoost or 1.1
+        end
+        xpSystem:AddXP(Perks.Fitness, RB42.Config.FitnessXpPerTick * xpMult)
 
         if terrain == "stairs" then
-            xpSystem:AddXP(Perks.Nimble, RB42.Config.NimbleXpPerStairsTick)
+            xpSystem:AddXP(Perks.Nimble, RB42.Config.NimbleXpPerStairsTick * xpMult)
         end
 
         xpAccumulator = 0
@@ -316,7 +335,7 @@ end
 -- Subsystem: Durability wear
 -- Uses outer wearAccumulator/wheelsBlown via closure
 -- ============================================================
-local function updateWear(player, rbItem, terrain)
+local function updateWear(player, rbItem, terrain, playerHasTrait)
     wearAccumulator = wearAccumulator + 0.25
 
     if wearAccumulator >= 10.0 then
@@ -339,6 +358,12 @@ local function updateWear(player, rbItem, terrain)
                 bootWear = RB42.Config.Wear.BlockedBoots
             end
 
+            -- Apply 20% wear reduction if player has Rollerblader trait
+            if playerHasTrait then
+                wheelWear = wheelWear * 0.8
+                bootWear = bootWear * 0.8
+            end
+
             md.rb_wheels = RB42.Clamp((md.rb_wheels or RB42.Config.WheelsMax) - (wheelWear * 10), 0, RB42.Config.WheelsMax)
             md.rb_boots = RB42.Clamp((md.rb_boots or RB42.Config.BootsMax) - (bootWear * 10), 0, RB42.Config.BootsMax)
 
@@ -358,7 +383,7 @@ end
 -- ============================================================
 -- Subsystem: Endurance drain
 -- ============================================================
-local function updateEndurance(player, terrain)
+local function updateEndurance(player, terrain, playerHasTrait)
     local stats = player:getStats()
     if not stats or stats.Fatigue == nil then return end
 
@@ -376,6 +401,11 @@ local function updateEndurance(player, terrain)
         drainAmount = drainAmount * 2.5
     end
 
+    -- Apply 25% fatigue reduction if player has Rollerblader trait
+    if playerHasTrait then
+        drainAmount = drainAmount * 0.75
+    end
+
     stats.Fatigue = math.min(1.0, stats.Fatigue + drainAmount)
 end
 
@@ -386,6 +416,7 @@ Events.OnPlayerUpdate.Add(function(player)
     if not player then return end
     if player:isDead() then return end
 
+    local playerHasTrait = player:hasTrait(RB42.CharacterTrait.Rollerblader)
     local rbItem = getWornRollerblades(player)
 
     if rbItem then
@@ -400,7 +431,7 @@ Events.OnPlayerUpdate.Add(function(player)
             stairsTimer = stairsTimer + 1
             if stairsTimer - lastFallCheck >= 30 then
                 lastFallCheck = stairsTimer
-                checkStairFall(player)
+                checkStairFall(player, playerHasTrait)
             end
         else
             stairsTimer = 0
@@ -410,25 +441,33 @@ Events.OnPlayerUpdate.Add(function(player)
         -- ATTACK FALL CHECK
         if player:isAttacking() and not isAttacking then
             isAttacking = true
-            checkAttackFall(player)
+            checkAttackFall(player, playerHasTrait)
         end
         if not player:isAttacking() then
             isAttacking = false
         end
 
         -- IS PLAYER ACTUALLY MOVING?
-        local isActuallyMoving = player:isMoving() and
-            (player:getX() ~= player:getLastX() or player:getY() ~= player:getLastY())
+        local isActuallyMoving = (player:getX() ~= player:getLastX() or player:getY() ~= player:getLastY())
 
         if isActuallyMoving then
-            updateXP(player, terrain)
+            stoppedTimer = 0  -- Reset stopped timer when moving
+            updateXP(player, playerHasTrait, terrain)
             updateNoise(player, terrain)
-            updateWear(player, rbItem, terrain)
-            updateEndurance(player, terrain)
+            updateWear(player, rbItem, terrain, playerHasTrait)
+            updateEndurance(player, terrain, playerHasTrait)
         else
-            xpAccumulator = 0
-            wearAccumulator = 0
-            noiseAccumulator = 0
+            -- Only reset accumulators after 100ms of being stationary
+            -- Accounts for animation reset when player stops moving, so they don't lose XP/wear/endurance if they just stop for a moment
+            stoppedTimer = stoppedTimer + 0.025  -- ~25ms per tick
+            if stoppedTimer >= 0.1 then  -- 100ms threshold
+                if player:getX() ~= player:getLastX() or player:getY() ~= player:getLastY() then
+                    xpAccumulator = 0
+                end
+            end
+            
+                wearAccumulator = 0
+                noiseAccumulator = 0
         end
 
         -- SPEED MULTIPLIER
@@ -487,6 +526,7 @@ Events.OnPlayerUpdate.Add(function(player)
             xpAccumulator = 0
             wearAccumulator = 0
             noiseAccumulator = 0
+            stoppedTimer = 0
             wheelsBlown = false
             isAttacking = false
         end

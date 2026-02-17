@@ -20,6 +20,7 @@ RB42.Config = {
     -- XP System
     FitnessXpPerTick = 0.25,  -- XP per tick while moving on rollerblades (any terrain)
     NimbleXpPerStairsTick = 0.4,  -- XP per tick while on stairs (balance training)
+    TraitXpBoost = 1.1,  -- 10% XP boost for Rollerblader trait
 
     -- Carpet detection: floor sprite name contains any of these
     CarpetKeywords = { "carpet", "rug", "mat" },
