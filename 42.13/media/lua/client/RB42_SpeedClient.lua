@@ -40,6 +40,7 @@ local function getTerrainType(player)
                 -- Check object name
                 if obj.getObjectName then
                     local objName = tostring(obj:getObjectName()):lower()
+                    -- print("[RB42] Checking object: " .. objName)
                     -- ANY tree or bush counts as blocked
                     -- Use patterns so "tree" doesn't match inside "street"
                     if (objName:find("%f[%a]tree%f[%A]") or objName:find("%f[%a]tree$"))
@@ -54,10 +55,11 @@ local function getTerrainType(player)
                     local sprite = obj:getSprite()
                     if sprite and sprite.getName then
                         local spriteName = tostring(sprite:getName()):lower()
+                        -- print("[RB42] Checking sprite: " .. spriteName)
                         -- ANY tree, bush, or tall vegetation
                         -- Use patterns so "tree" doesn't match inside "street"
                         if (spriteName:find("%f[%a]tree%f[%A]") or spriteName:find("%f[%a]tree$"))
-                        or spriteName:find("bush") or spriteName:find("hedge") then
+                        or spriteName:find("bush") or spriteName:find("hedge") or spriteName:find("vegetation") then
                             -- print("[RB42] BLOCKED by sprite: " .. spriteName)
                             return "blocked"
                         end
