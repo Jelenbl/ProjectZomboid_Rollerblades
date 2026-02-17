@@ -64,6 +64,47 @@ Noise scales with your speed and the surface you're skating on.
 Hard surfaces like concrete and asphalt are louder, while grass and dirt dampen the sound. 
 Sneaking on wheels is possible but still noisier than regular footwear — plan your routes carefully.
 
+
+[table]
+    [tr]
+        [th]Movement[/th]
+        [th]Normal[/th]
+        [th]Rollerblade[/th]
+    [/tr]
+    [tr]
+        [td]Walking[/td]
+        [td]~7[/td]
+        [td]10[/td]
+    [/tr]
+    [tr]
+        [td]Running[/td]
+        [td]~8[/td]
+        [td]13[/td]
+    [/tr]
+    [tr]
+        [td]Sprinting[/td]
+        [td]~11[/td]
+        [td]17[/td]
+    [/tr]
+    [tr]
+        [td]Sneaking[/td]
+        [td]~3[/td]
+        [td]6[/td]
+    [/tr]
+    [tr]
+        [td]Stairs[/td]
+        [td]-[/td]
+        [td]14[/td]
+    [/tr]
+    [tr]
+        [td]Blocked[/td]
+        [td]-[/td]
+        [td]8[/td]
+    [/tr]
+[/table]
+
+
+
 [b]Maintenance System[/b]
 
 Actions are instant!
