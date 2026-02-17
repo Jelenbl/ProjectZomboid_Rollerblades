@@ -56,6 +56,14 @@ A fully-featured mod that adds functional rollerblades to Project Zomboid with t
 [/list]
 [/list]
 
+
+[b]Noise System[/b]
+
+Rollerblades now generate realistic movement noise that attracts nearby zombies. 
+Noise scales with your speed and the surface you're skating on. 
+Hard surfaces like concrete and asphalt are louder, while grass and dirt dampen the sound. 
+Sneaking on wheels is possible but still noisier than regular footwear — plan your routes carefully.
+
 [b]Maintenance System[/b]
 
 Actions are instant!
