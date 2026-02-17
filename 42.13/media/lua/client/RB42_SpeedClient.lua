@@ -312,7 +312,7 @@ Events.OnPlayerUpdate.Add(function(player)
             local nimbleReduction = math.min(nimbleLevel, 10) * RB42.Config.reductionPerNimbleLevelForAttack  -- Max 1% reduction at level 10
             fallChance = fallChance - nimbleReduction
             something = ZombRand(100)
-            print("[RB42] Attack fall chance: " .. string.format("%.3f", fallChance) .. " | Roll: " .. something .. ")")
+            -- print("[RB42] Attack fall chance: " .. string.format("%.3f", fallChance) .. " | Roll: " .. something .. ")")
             if something < fallChance then
                 fallOnStairs(player)
                 stairsTimer = 0  -- Reset timer after fall

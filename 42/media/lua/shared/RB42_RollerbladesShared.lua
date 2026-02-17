@@ -11,8 +11,8 @@ RB42.Config = {
 
     -- Nimble System
     fallChanceOnStairsCheck = 2.0,  -- Base 2% chance to fall on stairs check
-    attackFallChancePerAttack = 1.00,  -- 1% increased fall chance per attack
-    reductionPerNimbleLevelForAttack = 0.10,     -- 0.1% reduction in fall chance per nimble level for an Attack
+    attackFallChancePerAttack = 10,  -- Base 10% increased fall chance per attack
+    reductionPerNimbleLevelForAttack = 1,     -- 1% reduction in fall chance per nimble level for an Attack
     reductionPerNimbleLevelForStairs = 0.20,     -- 2% reduction in fall chance per nimble level on stairs
     
     -- XP System
