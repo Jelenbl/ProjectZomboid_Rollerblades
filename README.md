@@ -7,6 +7,14 @@ A fully-featured mod that adds functional rollerblades to Project Zomboid with t
 
 ## Features
 
+### Rollerblader Trait (NEW!)
+A 3-point positive trait that gives you a head start on skating:
+- **25% less fatigue drain** while skating
+- **50% less fall chance** on stairs and while attacking
+- **20% slower durability loss** on wheels and boots
+- **10% XP boost** to Fitness and Nimble while skating
+- **Start with Rollerblades** — no need to find them!
+
 ### Dynamic Speed System
 - **Hard surfaces** (concrete, asphalt, indoor floors, streets): _+50% speed boost_
 - **Soft surfaces** (grass, vegetation, carpet): _25% speed_
@@ -33,6 +41,7 @@ A fully-featured mod that adds functional rollerblades to Project Zomboid with t
 ### Skill Progression
 - **Fitness XP:** Gain +0.25 XP per minute of skating (any terrain)
 - **Nimble XP:** Gain +1 XP per minute of skating on stairs
+- **Trait XP Boost:** +10% XP if you have the Rollerblader trait
 - **Only while moving** — standing still doesn't grant XP
 
 ### Fatigue System
@@ -155,16 +164,26 @@ Free to use and modify. Give credit if redistributing.
 
 ---
 
-**Version:** 1.2  
-**Build:** 42+  
-**Multiplayer:** Should work  
-**Last Updated:** February 16, 2026
+**Version:** 1.3
+**Build:** 42+
+**Multiplayer:** Should work
+**Last Updated:** February 17, 2026
 
 ---
 
-Decreased Fall Chance on stairs  
-Added texture to strapped shoes (actual rollerblades to come)  
-Added Animation of Skating while "Running" - to be improved upon  
-Added Fall Chance While Attacking
-Added Noise Levels
+## Changelog
+
+### v1.3
+- Added **Rollerblader Trait** (3 points):
+  - 25% less fatigue drain while skating
+  - 50% less fall chance on stairs and while attacking
+  - 20% slower durability loss on wheels and boots
+  - 10% XP boost to Fitness and Nimble
+  - Start with Rollerblades
+- Removed "WIP" from mod name
+- Decreased Fall Chance on stairs
+- Added texture to strapped shoes (actual rollerblades to come)
+- Added Animation of Skating while "Running" - to be improved upon
+- Added Fall Chance While Attacking
+- Added Noise Levels
 
