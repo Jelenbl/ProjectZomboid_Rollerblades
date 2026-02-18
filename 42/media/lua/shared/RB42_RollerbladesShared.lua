@@ -34,10 +34,10 @@ RB42.Config = {
     -- Rollerblades are roughly 2x louder due to hard wheels
     NoiseWalking    = 10,   -- Hard wheels rolling at walking pace
     NoiseRunning    = 13,   -- Fast skating, very audible
-    NoiseSneaking   = 6,   -- Can't really sneak on wheels
+    NoiseSneaking   = 6,    -- Can't really sneak on wheels
     NoiseSprinting  = 15,   -- Full speed, wheels screaming
     NoiseStairs     = 14,   -- Clunking up/down stairs (overrides movement type)
-    NoiseBlocked    = 8,   -- Pushing through brush, slow but crunchy
+    NoiseBlocked    = 8,    -- Pushing through brush, slow but crunchy
     NoiseTerrainHard = 1.2, -- Multiplier: louder on concrete/asphalt
     NoiseTerrainSoft = 0.7, -- Multiplier: quieter on grass/dirt
     NoiseVolumeRatio = 0.6, -- Volume = radius * this (lower = less attractive to zombies)
