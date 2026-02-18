@@ -10,17 +10,54 @@ local function getPlayerByOnlineID(id)
   return nil
 end
 
-local function findItemById(inv, id)
+local function findItemByIdInInventory(inv, id)
   -- searches inventory recursively for item with matching ID
   local items = inv:getItems()
   for i=0, items:size()-1 do
     local it = items:get(i)
     if it and it.getID and it:getID() == id then return it end
     if it and it.getInventory and it:getInventory() then
-      local sub = findItemById(it:getInventory(), id)
+      local sub = findItemByIdInInventory(it:getInventory(), id)
       if sub then return sub end
     end
   end
+  return nil
+end
+
+local function findItemById(playerObj, id)
+  -- First check main inventory by ID
+  local inv = playerObj:getInventory()
+  local item = findItemByIdInInventory(inv, id)
+  if item then return item end
+
+  -- Check worn items by ID
+  local worn = playerObj:getWornItems()
+  if worn then
+    for i = 0, worn:size() - 1 do
+      local it = worn:get(i):getItem()
+      if it and it.getID and it:getID() == id then return it end
+    end
+  end
+
+  -- Fallback: Find by type (in case item IDs don't match between client/server)
+  -- Check inventory first
+  local rbInInv = inv:getFirstTypeRecurse("Rollerblades42.Rollerblades")
+  if rbInInv then
+    print("[RB42 ServerCommands] Found rollerblades by type in inventory (ID fallback)")
+    return rbInInv
+  end
+
+  -- Check worn items by type
+  if worn then
+    for i = 0, worn:size() - 1 do
+      local it = worn:get(i):getItem()
+      if it and it:getFullType() == "Rollerblades42.Rollerblades" then
+        print("[RB42 ServerCommands] Found rollerblades by type in worn items (ID fallback)")
+        return it
+      end
+    end
+  end
+
   return nil
 end
 
@@ -46,55 +83,76 @@ local function onClientCommand(module, command, playerObj, args)
   print("[RB42 ServerCommands] Processing command for rbId: " .. tostring(args.rbId))
 
   local inv = playerObj:getInventory()
-  local rb = findItemById(inv, args.rbId)
-  if not rb then return end
+  local rb = findItemById(playerObj, args.rbId)
+  if not rb then
+    print("[RB42 ServerCommands] Could not find item with ID: " .. tostring(args.rbId))
+    return
+  end
+  print("[RB42 ServerCommands] Found item: " .. tostring(rb:getFullType()))
 
   -- init durability
   local md = RB42.GetOrInitDurability(rb)
 
   if command == "ReplaceWheels" then
     print("[RB42] ReplaceWheels command received for item ID: " .. tostring(args.rbId))
-    
-    if inv:getCountTypeRecurse("Base.Screwdriver") <= 0 then 
+    print("[RB42] Current wheel durability: " .. tostring(md.rb_wheels))
+
+    if inv:getCountTypeRecurse("Base.Screwdriver") <= 0 then
       print("[RB42] No screwdriver found")
-      return 
+      return
     end
-    if inv:getCountTypeRecurse("Rollerblades42.RollerbladeWheels") <= 0 then 
+    if inv:getCountTypeRecurse("Rollerblades42.RollerbladeWheels") <= 0 then
       print("[RB42] No wheels found")
-      return 
+      return
     end
 
-    consumeOne(inv, "Rollerblades42.RollerbladeWheels")
+    local consumed = consumeOne(inv, "Rollerblades42.RollerbladeWheels")
+    print("[RB42] Wheel item consumed: " .. tostring(consumed))
+
     md.rb_wheels = RB42.Config.WheelsMax
-    
-    print("[RB42] Wheels replaced! New durability: " .. md.rb_wheels)
+    print("[RB42] Set wheel durability to: " .. tostring(md.rb_wheels))
+
+    -- Force modData sync in multiplayer
+    if isServer() then
+      rb:transmitModData()
+    end
+
+    print("[RB42] Wheels replaced! Final durability: " .. tostring(rb:getModData().rb_wheels))
     playerObj:Say("Replaced rollerblade wheels!")
     return
   end
 
   if command == "CleanWheels" then
     print("[RB42] CleanWheels command received for item ID: " .. tostring(args.rbId))
-    
-    if inv:getCountTypeRecurse("Base.Screwdriver") <= 0 then 
+    print("[RB42] Current wheel durability: " .. tostring(md.rb_wheels))
+
+    if inv:getCountTypeRecurse("Base.Screwdriver") <= 0 then
       print("[RB42] No screwdriver found")
-      return 
+      return
     end
-    if inv:getCountTypeRecurse("Base.Toothbrush") <= 0 then 
+    if inv:getCountTypeRecurse("Base.Toothbrush") <= 0 then
       print("[RB42] No toothbrush found")
-      return 
+      return
     end
-    if inv:getCountTypeRecurse("Base.AlcoholWipes") <= 0 then 
+    if inv:getCountTypeRecurse("Base.AlcoholWipes") <= 0 then
       print("[RB42] No alcohol wipes found")
-      return 
+      return
     end
 
     -- Consume AlcoholWipes (used up), keep Screwdriver and Toothbrush
-    consumeOne(inv, "Base.AlcoholWipes")
+    local consumed = consumeOne(inv, "Base.AlcoholWipes")
+    print("[RB42] AlcoholWipes consumed: " .. tostring(consumed))
 
     -- Cleaning restores some wheels durability
     md.rb_wheels = math.min(RB42.Config.WheelsMax, (md.rb_wheels or RB42.Config.WheelsMax) + 8)
-    
-    print("[RB42] Wheels cleaned! New durability: " .. md.rb_wheels)
+    print("[RB42] Set wheel durability to: " .. tostring(md.rb_wheels))
+
+    -- Force modData sync in multiplayer
+    if isServer() then
+      rb:transmitModData()
+    end
+
+    print("[RB42] Wheels cleaned! Final durability: " .. tostring(rb:getModData().rb_wheels))
     playerObj:Say("Cleaned rollerblade wheels!")
     return
   end
