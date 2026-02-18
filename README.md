@@ -148,6 +148,7 @@ Actions are instant!
 ## Known Issues / TODO
 - Custom 3D rollerblade models
 - Designed for MP - untested though
+- Complete Animation
 
 ## Known Limitations
 - **Visual:** Rollerblades currently appear as trainers (vanilla shoe model)
@@ -158,9 +159,6 @@ Actions are instant!
 - **Mod by:** GingerVitis55
 - **Build:** Project Zomboid Build 42
 - **Animation Assistance:** RedChili
-
-## License
-Free to use and modify. Give credit if redistributing.
 
 ---
 

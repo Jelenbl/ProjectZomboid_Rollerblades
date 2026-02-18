@@ -1,5 +1,3 @@
-[b]Pre-Update Notes 2/17 [/b]
-
 [b][u]Rollerblades Mod for Project Zomboid Build 42[/u][/b]
 
 A fully-featured mod that adds functional rollerblades to Project Zomboid with terrain-based speed mechanics, skill progression, and maintenance systems.
@@ -37,8 +35,10 @@ A 3-point positive trait that gives you a head start on skating:
 
 [b]Attack System[/b]
 [list]
-[*][b]Fall risk[/b]: 10% chance per Attack
-[*][b]Mitigation[/b]: 1% reduction per nimble level
+[*][b]Fall risk Stairs[/b]: 2% chance per Attack
+[*][b]Stairs Mitigation[/b]: 0.2% reduction per nimble level
+[*][b]Fall risk Attack[/b]: 10% chance per Attack
+[*][b]Attack Mitigation[/b]: 1% reduction per nimble level
 [/list]
 
 [b]Fall Injury System[/b]
@@ -52,8 +52,8 @@ A 3-point positive trait that gives you a head start on skating:
 
 [b]Skill Progression[/b]
 [list]
-[*][b]Fitness XP[/b]: Gain +0.25 XP per minute of skating (any terrain)
-[*][b]Nimble XP[/b]: Gain +1 XP per minute of skating on stairs
+[*][b]Fitness XP[/b]: Gain +0.05 XP per minute of skating (any terrain)
+[*][b]Nimble XP[/b]: Gain +0.02 XP per minute of skating on stairs
 [*][b]Trait XP Boost[/b]: +10% XP if you have the Rollerblader trait
 [*][b]Only while moving[/b] — standing still doesn't grant XP
 [/list]
@@ -230,7 +230,7 @@ Actions are instant!
 [list]
 [*]Custom 3D rollerblade models
 [*]Designed for MP - untested though
-[*]Make animation smoother
+[*]Complete animation 
 [/list]
 
 
@@ -241,15 +241,12 @@ Actions are instant!
 [*][b]Animation Assitance[/b]: RedChili
 [/list]
 
-[h1]License[/h1]
-Free to use and modify. Give credit if redistributing.
-
 ---------------------------------------------------------
 
 [b]Version[/b]: 1.3
 [b]Build[/b]: 42+
 [b]Multiplayer[/b]: Should work
-[b]Last Updated[/b]: February 17, 2026
+[b]Last Updated[/b]: February 18, 2026
 
 ---------------------------------------------------------
 
@@ -273,4 +270,5 @@ Free to use and modify. Give credit if redistributing.
 [*]Added Fall Chance While Attacking
 [*]Added Noise Levels
 [*]Fix Repair and Clean Wheels for MP
+[*]Fix XP System for MP
 [/list]

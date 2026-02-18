@@ -18,8 +18,8 @@ RB42.Config = {
     reductionPerNimbleLevelForStairs = 0.20,     -- 2% reduction in fall chance per nimble level on stairs
     
     -- XP System
-    FitnessXpPerTick = 0.25,  -- XP per tick while moving on rollerblades (any terrain)
-    NimbleXpPerStairsTick = 0.4,  -- XP per tick while on stairs (balance training)
+    FitnessXpPerTick = 0.05,  -- XP per tick while moving on rollerblades (any terrain)
+    NimbleXpPerStairsTick = 0.02,  -- XP per tick while on stairs (balance training)
     TraitXpBoost = 1.1,  -- 10% XP boost for Rollerblader trait
 
     -- Carpet detection: floor sprite name contains any of these
