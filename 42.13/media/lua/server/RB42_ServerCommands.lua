@@ -1,6 +1,6 @@
 require "RB42_RollerbladesShared"
 
-print("[RB42 ServerCommands] Starting to load...")
+print("[RB42 ServerCommands] ===== SERVER addXp() VERSION - FEB 18 2026 =====")
 
 local function getPlayerByOnlineID(id)
   for i=0,getNumActivePlayers()-1 do
@@ -69,15 +69,59 @@ end
 
 local function onClientCommand(module, command, playerObj, args)
   print("[RB42 ServerCommands] onClientCommand called - module: " .. tostring(module) .. ", command: " .. tostring(command))
-  
-  if module ~= "RB42" then 
-    print("[RB42 ServerCommands] Module mismatch, ignoring")
-    return 
+  if module ~= "RB42" then return end
+  if not playerObj then return end
+
+  -- Handle RequestXP command - use vanilla addXp() on server (MP authoritative)
+  if command == "RequestXP" then
+    if args then
+      local fitnessXp = args.fitnessXp or 0
+      local nimbleXp = args.nimbleXp or 0
+
+      print("[RB42 ServerCommands] Using addXp() on SERVER - fitness: " .. tostring(fitnessXp) .. ", nimble: " .. tostring(nimbleXp))
+
+      -- addXp() is the vanilla global function used in shared code
+      -- It handles MP sync via AddXp network packet
+      if fitnessXp > 0 then
+        addXp(playerObj, Perks.Fitness, fitnessXp)
+        print("[RB42 ServerCommands] Server addXp() Fitness: " .. tostring(fitnessXp))
+      end
+      if nimbleXp > 0 then
+        addXp(playerObj, Perks.Nimble, nimbleXp)
+        print("[RB42 ServerCommands] Server addXp() Nimble: " .. tostring(nimbleXp))
+      end
+    end
+    return
   end
-  
-  if not playerObj or not args or not args.rbId then 
-    print("[RB42 ServerCommands] Missing playerObj or args.rbId")
-    return 
+
+  -- Handle UpdateWear command - apply durability wear on server (MP authoritative)
+  if command == "UpdateWear" then
+    if args and args.rbId then
+      local rb = findItemById(playerObj, args.rbId)
+      if rb then
+        local md = RB42.GetOrInitDurability(rb)
+        local wheelWear = args.wheelWear or 0
+        local bootWear = args.bootWear or 0
+
+        print("[RB42 ServerCommands] UpdateWear on SERVER - wheels: " .. tostring(wheelWear) .. ", boots: " .. tostring(bootWear))
+
+        md.rb_wheels = RB42.Clamp((md.rb_wheels or RB42.Config.WheelsMax) - wheelWear, 0, RB42.Config.WheelsMax)
+        md.rb_boots = RB42.Clamp((md.rb_boots or RB42.Config.BootsMax) - bootWear, 0, RB42.Config.BootsMax)
+
+        print("[RB42 ServerCommands] New durability - wheels: " .. tostring(md.rb_wheels) .. ", boots: " .. tostring(md.rb_boots))
+
+        -- Force modData sync in multiplayer
+        if isServer() then
+          rb:transmitModData()
+        end
+      end
+    end
+    return
+  end
+
+  -- Commands below require rbId
+  if not args or not args.rbId then
+    return
   end
 
   print("[RB42 ServerCommands] Processing command for rbId: " .. tostring(args.rbId))
