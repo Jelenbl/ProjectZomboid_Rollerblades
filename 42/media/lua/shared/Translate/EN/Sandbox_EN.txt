@@ -3,6 +3,30 @@ Sandbox_EN = {
     Sandbox_Rollerblades42 = "Rollerblades",
 
     -- ============================================
+    -- SECTION DIVIDERS
+    -- ============================================
+    Sandbox_Rollerblades42_DividerSpeed = "______________ Speed Settings ______________",
+    Sandbox_Rollerblades42_DividerSpeed_tooltip = "Visual separator - checking this has no effect.",
+
+    Sandbox_Rollerblades42_DividerFallTrip = "____________ Fall/Trip Settings ____________",
+    Sandbox_Rollerblades42_DividerFallTrip_tooltip = "Visual separator - checking this has no effect.",
+
+    Sandbox_Rollerblades42_DividerXP = "________________ XP Settings ________________",
+    Sandbox_Rollerblades42_DividerXP_tooltip = "Visual separator - checking this has no effect.",
+
+    Sandbox_Rollerblades42_DividerDurability = "____________ Durability Settings ____________",
+    Sandbox_Rollerblades42_DividerDurability_tooltip = "Visual separator - checking this has no effect.",
+
+    Sandbox_Rollerblades42_DividerNoise = "______________ Noise Settings ______________",
+    Sandbox_Rollerblades42_DividerNoise_tooltip = "Visual separator - checking this has no effect.",
+
+    Sandbox_Rollerblades42_DividerEndurance = "____________ Endurance Settings ____________",
+    Sandbox_Rollerblades42_DividerEndurance_tooltip = "Visual separator - checking this has no effect.",
+
+    Sandbox_Rollerblades42_DividerRepair = "_____________ Repair Settings _____________",
+    Sandbox_Rollerblades42_DividerRepair_tooltip = "Visual separator - checking this has no effect.",
+
+    -- ============================================
     -- SPEED OPTIONS
     -- ============================================
     Sandbox_Rollerblades42_SpeedHard = "Hard Surface Speed",

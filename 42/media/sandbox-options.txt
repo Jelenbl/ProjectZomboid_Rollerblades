@@ -1,5 +1,13 @@
 VERSION = 1,
 
+option Rollerblades42.DividerSpeed
+{
+    type = boolean,
+    default = false,
+    page = Rollerblades,
+    translation = Rollerblades42_DividerSpeed,
+}
+
 option Rollerblades42.SpeedHard
 {
     type = double,
@@ -38,6 +46,14 @@ option Rollerblades42.SpeedBlocked
     max = 1.0,
     page = Rollerblades,
     translation = Rollerblades42_SpeedBlocked,
+}
+
+option Rollerblades42.DividerFallTrip
+{
+    type = boolean,
+    default = false,
+    page = Rollerblades,
+    translation = Rollerblades42_DividerFallTrip,
 }
 
 option Rollerblades42.FallChanceStairs
@@ -110,6 +126,14 @@ option Rollerblades42.TripMinMultiplier
     translation = Rollerblades42_TripMinMultiplier,
 }
 
+option Rollerblades42.DividerXP
+{
+    type = boolean,
+    default = false,
+    page = Rollerblades,
+    translation = Rollerblades42_DividerXP,
+}
+
 option Rollerblades42.FitnessXpPerTick
 {
     type = double,
@@ -138,6 +162,14 @@ option Rollerblades42.TraitXpBoost
     max = 2.0,
     page = Rollerblades,
     translation = Rollerblades42_TraitXpBoost,
+}
+
+option Rollerblades42.DividerDurability
+{
+    type = boolean,
+    default = false,
+    page = Rollerblades,
+    translation = Rollerblades42_DividerDurability,
 }
 
 option Rollerblades42.BootsMax
@@ -240,6 +272,14 @@ option Rollerblades42.WearBlockedBoots
     translation = Rollerblades42_WearBlockedBoots,
 }
 
+option Rollerblades42.DividerNoise
+{
+    type = boolean,
+    default = false,
+    page = Rollerblades,
+    translation = Rollerblades42_DividerNoise,
+}
+
 option Rollerblades42.NoiseMultiplier
 {
     type = double,
@@ -340,6 +380,14 @@ option Rollerblades42.NoiseVolumeRatio
     translation = Rollerblades42_NoiseVolumeRatio,
 }
 
+option Rollerblades42.DividerEndurance
+{
+    type = boolean,
+    default = false,
+    page = Rollerblades,
+    translation = Rollerblades42_DividerEndurance,
+}
+
 option Rollerblades42.WalkEnduranceDrain
 {
     type = double,
@@ -388,6 +436,14 @@ option Rollerblades42.TraitEnduranceReduction
     max = 1.0,
     page = Rollerblades,
     translation = Rollerblades42_TraitEnduranceReduction,
+}
+
+option Rollerblades42.DividerRepair
+{
+    type = boolean,
+    default = false,
+    page = Rollerblades,
+    translation = Rollerblades42_DividerRepair,
 }
 
 option Rollerblades42.WheelsMinPctAt0
