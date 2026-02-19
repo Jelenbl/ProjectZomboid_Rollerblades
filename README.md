@@ -9,7 +9,7 @@ A fully-featured mod that adds functional rollerblades to Project Zomboid with t
 
 ### Rollerblader Trait (NEW!)
 A 3-point positive trait that gives you a head start on skating:
-- **25% less fatigue drain** while skating
+- **25% less endurance drain** while skating
 - **50% less fall chance** on stairs and while attacking
 - **20% slower durability loss** on wheels and boots
 - **10% XP boost** to Fitness and Nimble while skating
@@ -44,8 +44,8 @@ A 3-point positive trait that gives you a head start on skating:
 - **Trait XP Boost:** +10% XP if you have the Rollerblader trait
 - **Only while moving** — standing still doesn't grant XP
 
-### Fatigue System
-- **Increased fatigue** while skating:
+### Endurance System
+- **Increased endurance drain** while skating:
   - Walking: 0.01 drain per tick (significantly more than normal)
   - Running: 0.015 drain per tick (very exhausting)
   - Stairs: additional 1.75x multiplier on top
@@ -173,7 +173,7 @@ Actions are instant!
 
 ### v1.3
 - Added **Rollerblader Trait** (3 points):
-  - 25% less fatigue drain while skating
+  - 25% less endurance drain while skating
   - 50% less fall chance on stairs and while attacking
   - 20% slower durability loss on wheels and boots
   - 10% XP boost to Fitness and Nimble

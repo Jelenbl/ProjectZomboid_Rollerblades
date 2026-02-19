@@ -1,0 +1,178 @@
+Sandbox_EN = {
+    -- Page Title
+    Sandbox_Rollerblades42 = "Rollerblades",
+
+    -- ============================================
+    -- SPEED OPTIONS
+    -- ============================================
+    Sandbox_Rollerblades42_SpeedHard = "Hard Surface Speed",
+    Sandbox_Rollerblades42_SpeedHard_tooltip = "Speed multiplier on concrete, asphalt, indoor floors. Default: 1.5 (+50% speed)",
+
+    Sandbox_Rollerblades42_SpeedSoft = "Soft Surface Speed",
+    Sandbox_Rollerblades42_SpeedSoft_tooltip = "Speed multiplier on grass, dirt, carpet. Default: 0.75 (-25% speed)",
+
+    Sandbox_Rollerblades42_SpeedStairs = "Stairs Speed",
+    Sandbox_Rollerblades42_SpeedStairs_tooltip = "Speed multiplier when going up/down stairs. Default: 0.30 (-70% speed)",
+
+    Sandbox_Rollerblades42_SpeedBlocked = "Blocked Terrain Speed",
+    Sandbox_Rollerblades42_SpeedBlocked_tooltip = "Speed multiplier when pushing through bushes/trees. Default: 0.30 (-70% speed)",
+
+    -- ============================================
+    -- FALL/TRIP OPTIONS
+    -- ============================================
+    Sandbox_Rollerblades42_FallChanceStairs = "Fall Chance on Stairs",
+    Sandbox_Rollerblades42_FallChanceStairs_tooltip = "Base percent chance to fall when using stairs. Default: 2.0%",
+
+    Sandbox_Rollerblades42_FallChanceAttack = "Fall Chance per Attack",
+    Sandbox_Rollerblades42_FallChanceAttack_tooltip = "Percent increase in fall chance per attack made. Default: 10%",
+
+    Sandbox_Rollerblades42_NimbleReductionAttack = "Nimble Reduction (Attack)",
+    Sandbox_Rollerblades42_NimbleReductionAttack_tooltip = "Fall chance reduction per Nimble level during attacks. Default: 1.0%",
+
+    Sandbox_Rollerblades42_NimbleReductionStairs = "Nimble Reduction (Stairs)",
+    Sandbox_Rollerblades42_NimbleReductionStairs_tooltip = "Fall chance reduction per Nimble level on stairs. Default: 0.20%",
+
+    Sandbox_Rollerblades42_TripBaseChance = "Trip Base Chance",
+    Sandbox_Rollerblades42_TripBaseChance_tooltip = "Base trip chance per tick when moving on blocked terrain. Default: 0.025 (2.5%)",
+
+    Sandbox_Rollerblades42_TripNimbleReduction = "Trip Nimble Reduction",
+    Sandbox_Rollerblades42_TripNimbleReduction_tooltip = "Trip chance reduction per Nimble level. Default: 0.06 (6% per level)",
+
+    Sandbox_Rollerblades42_TripMinMultiplier = "Trip Minimum Multiplier",
+    Sandbox_Rollerblades42_TripMinMultiplier_tooltip = "Minimum trip chance multiplier after Nimble reduction. Default: 0.35 (35%)",
+
+    -- ============================================
+    -- XP OPTIONS
+    -- ============================================
+    Sandbox_Rollerblades42_FitnessXpPerTick = "Fitness XP per Tick",
+    Sandbox_Rollerblades42_FitnessXpPerTick_tooltip = "Fitness XP earned per tick while moving on rollerblades. Default: 0.05",
+
+    Sandbox_Rollerblades42_NimbleXpPerStairsTick = "Nimble XP per Stairs Tick",
+    Sandbox_Rollerblades42_NimbleXpPerStairsTick_tooltip = "Nimble XP earned per tick while on stairs (balance training). Default: 0.02",
+
+    Sandbox_Rollerblades42_TraitXpBoost = "Rollerblader Trait XP Boost",
+    Sandbox_Rollerblades42_TraitXpBoost_tooltip = "XP multiplier for characters with the Rollerblader trait. Default: 1.1 (+10%)",
+
+    -- ============================================
+    -- DURABILITY OPTIONS
+    -- ============================================
+    Sandbox_Rollerblades42_BootsMax = "Boots Max Durability",
+    Sandbox_Rollerblades42_BootsMax_tooltip = "Maximum durability points for the boots component. Default: 60",
+
+    Sandbox_Rollerblades42_WheelsMax = "Wheels Max Durability",
+    Sandbox_Rollerblades42_WheelsMax_tooltip = "Maximum durability points for the wheels component. Default: 30",
+
+    Sandbox_Rollerblades42_WearHardWheels = "Wheel Wear (Hard Surface)",
+    Sandbox_Rollerblades42_WearHardWheels_tooltip = "Wheel durability lost per tick on hard surfaces. Default: 0.0015",
+
+    Sandbox_Rollerblades42_WearSoftWheels = "Wheel Wear (Soft Surface)",
+    Sandbox_Rollerblades42_WearSoftWheels_tooltip = "Wheel durability lost per tick on soft surfaces. Default: 0.003",
+
+    Sandbox_Rollerblades42_WearStairsWheels = "Wheel Wear (Stairs)",
+    Sandbox_Rollerblades42_WearStairsWheels_tooltip = "Wheel durability lost per tick on stairs. Default: 0.0045",
+
+    Sandbox_Rollerblades42_WearBlockedWheels = "Wheel Wear (Blocked)",
+    Sandbox_Rollerblades42_WearBlockedWheels_tooltip = "Wheel durability lost per tick on blocked terrain. Default: 0.006",
+
+    Sandbox_Rollerblades42_WearHardBoots = "Boot Wear (Hard Surface)",
+    Sandbox_Rollerblades42_WearHardBoots_tooltip = "Boot durability lost per tick on hard surfaces. Default: 0.001",
+
+    Sandbox_Rollerblades42_WearSoftBoots = "Boot Wear (Soft Surface)",
+    Sandbox_Rollerblades42_WearSoftBoots_tooltip = "Boot durability lost per tick on soft surfaces. Default: 0.002",
+
+    Sandbox_Rollerblades42_WearStairsBoots = "Boot Wear (Stairs)",
+    Sandbox_Rollerblades42_WearStairsBoots_tooltip = "Boot durability lost per tick on stairs. Default: 0.003",
+
+    Sandbox_Rollerblades42_WearBlockedBoots = "Boot Wear (Blocked)",
+    Sandbox_Rollerblades42_WearBlockedBoots_tooltip = "Boot durability lost per tick on blocked terrain. Default: 0.004",
+
+    -- ============================================
+    -- NOISE OPTIONS
+    -- ============================================
+    Sandbox_Rollerblades42_NoiseMultiplier = "Base Noise Multiplier",
+    Sandbox_Rollerblades42_NoiseMultiplier_tooltip = "Base multiplier for all rollerblade noise. Default: 1.2",
+
+    Sandbox_Rollerblades42_NoiseWalking = "Noise Radius (Walking)",
+    Sandbox_Rollerblades42_NoiseWalking_tooltip = "Noise radius in tiles when walking. Default: 10 (normal footsteps ~7)",
+
+    Sandbox_Rollerblades42_NoiseRunning = "Noise Radius (Running)",
+    Sandbox_Rollerblades42_NoiseRunning_tooltip = "Noise radius in tiles when running. Default: 13 (normal footsteps ~8)",
+
+    Sandbox_Rollerblades42_NoiseSneaking = "Noise Radius (Sneaking)",
+    Sandbox_Rollerblades42_NoiseSneaking_tooltip = "Noise radius in tiles when sneaking. Default: 6 (normal footsteps ~3)",
+
+    Sandbox_Rollerblades42_NoiseSprinting = "Noise Radius (Sprinting)",
+    Sandbox_Rollerblades42_NoiseSprinting_tooltip = "Noise radius in tiles when sprinting. Default: 15 (normal footsteps ~11)",
+
+    Sandbox_Rollerblades42_NoiseStairs = "Noise Radius (Stairs)",
+    Sandbox_Rollerblades42_NoiseStairs_tooltip = "Noise radius in tiles when using stairs (overrides movement type). Default: 14",
+
+    Sandbox_Rollerblades42_NoiseBlocked = "Noise Radius (Blocked)",
+    Sandbox_Rollerblades42_NoiseBlocked_tooltip = "Noise radius in tiles when moving through blocked terrain. Default: 8",
+
+    Sandbox_Rollerblades42_NoiseTerrainHard = "Noise Terrain Multiplier (Hard)",
+    Sandbox_Rollerblades42_NoiseTerrainHard_tooltip = "Noise multiplier on hard surfaces (concrete, asphalt). Default: 1.2",
+
+    Sandbox_Rollerblades42_NoiseTerrainSoft = "Noise Terrain Multiplier (Soft)",
+    Sandbox_Rollerblades42_NoiseTerrainSoft_tooltip = "Noise multiplier on soft surfaces (grass, dirt). Default: 0.7",
+
+    Sandbox_Rollerblades42_NoiseVolumeRatio = "Noise Volume Ratio",
+    Sandbox_Rollerblades42_NoiseVolumeRatio_tooltip = "Volume = radius * this ratio. Lower = less attractive to zombies. Default: 0.6",
+
+    -- ============================================
+    -- ENDURANCE OPTIONS
+    -- ============================================
+    Sandbox_Rollerblades42_WalkEnduranceDrain = "Walk Endurance Drain",
+    Sandbox_Rollerblades42_WalkEnduranceDrain_tooltip = "Endurance drained per tick while walking. Default: 0.0075",
+
+    Sandbox_Rollerblades42_RunEnduranceDrain = "Run Endurance Drain",
+    Sandbox_Rollerblades42_RunEnduranceDrain_tooltip = "Endurance drained per tick while running. Default: 0.005",
+
+    Sandbox_Rollerblades42_StairsEnduranceMultiplier = "Stairs Endurance Multiplier",
+    Sandbox_Rollerblades42_StairsEnduranceMultiplier_tooltip = "Endurance drain multiplier when on stairs. Default: 1.75",
+
+    Sandbox_Rollerblades42_BlockedEnduranceMultiplier = "Blocked Endurance Multiplier",
+    Sandbox_Rollerblades42_BlockedEnduranceMultiplier_tooltip = "Endurance drain multiplier when on blocked terrain. Default: 2.5",
+
+    Sandbox_Rollerblades42_TraitEnduranceReduction = "Trait Endurance Reduction",
+    Sandbox_Rollerblades42_TraitEnduranceReduction_tooltip = "Percent reduction in endurance drain with Rollerblader trait. Default: 0.25 (25%)",
+
+    -- ============================================
+    -- REPAIR OPTIONS
+    -- ============================================
+    Sandbox_Rollerblades42_WheelsMinPctAt0 = "Wheels Min Repair % (Skill 0)",
+    Sandbox_Rollerblades42_WheelsMinPctAt0_tooltip = "Minimum percent of wheel durability restored at Mechanics 0. Default: 0.20 (20%)",
+
+    Sandbox_Rollerblades42_WheelsMaxPctAt0 = "Wheels Max Repair % (Skill 0)",
+    Sandbox_Rollerblades42_WheelsMaxPctAt0_tooltip = "Maximum percent of wheel durability restored at Mechanics 0. Default: 0.35 (35%)",
+
+    Sandbox_Rollerblades42_WheelsMinPctAt10 = "Wheels Min Repair % (Skill 10)",
+    Sandbox_Rollerblades42_WheelsMinPctAt10_tooltip = "Minimum percent of wheel durability restored at Mechanics 10. Default: 0.70 (70%)",
+
+    Sandbox_Rollerblades42_WheelsMaxPctAt10 = "Wheels Max Repair % (Skill 10)",
+    Sandbox_Rollerblades42_WheelsMaxPctAt10_tooltip = "Maximum percent of wheel durability restored at Mechanics 10. Default: 0.90 (90%)",
+
+    Sandbox_Rollerblades42_BootsBonusMin = "Boots Repair Bonus Min",
+    Sandbox_Rollerblades42_BootsBonusMin_tooltip = "Minimum bonus durability points added when repairing boots. Default: 0.5",
+
+    Sandbox_Rollerblades42_BootsBonusMax = "Boots Repair Bonus Max",
+    Sandbox_Rollerblades42_BootsBonusMax_tooltip = "Maximum bonus durability points added when repairing boots. Default: 2.0",
+
+    Sandbox_Rollerblades42_ToothbrushRefundAt0 = "Toothbrush Refund (Skill 0)",
+    Sandbox_Rollerblades42_ToothbrushRefundAt0_tooltip = "Chance to not consume toothbrush at Mechanics 0. Default: 0.10 (10%)",
+
+    Sandbox_Rollerblades42_ToothbrushRefundAt10 = "Toothbrush Refund (Skill 10)",
+    Sandbox_Rollerblades42_ToothbrushRefundAt10_tooltip = "Chance to not consume toothbrush at Mechanics 10. Default: 0.60 (60%)",
+
+    Sandbox_Rollerblades42_GreaseRefundAt0 = "Grease Refund (Skill 0)",
+    Sandbox_Rollerblades42_GreaseRefundAt0_tooltip = "Chance to not consume grease at Mechanics 0. Default: 0.05 (5%)",
+
+    Sandbox_Rollerblades42_GreaseRefundAt10 = "Grease Refund (Skill 10)",
+    Sandbox_Rollerblades42_GreaseRefundAt10_tooltip = "Chance to not consume grease at Mechanics 10. Default: 0.55 (55%)",
+
+    Sandbox_Rollerblades42_AlcoholRefundAt0 = "Alcohol Refund (Skill 0)",
+    Sandbox_Rollerblades42_AlcoholRefundAt0_tooltip = "Chance to not consume rubbing alcohol at Mechanics 0. Default: 0.10 (10%)",
+
+    Sandbox_Rollerblades42_AlcoholRefundAt10 = "Alcohol Refund (Skill 10)",
+    Sandbox_Rollerblades42_AlcoholRefundAt10_tooltip = "Chance to not consume rubbing alcohol at Mechanics 10. Default: 0.70 (70%)",
+}

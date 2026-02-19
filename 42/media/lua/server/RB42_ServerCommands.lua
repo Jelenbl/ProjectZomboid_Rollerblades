@@ -84,11 +84,11 @@ local function onClientCommand(module, command, playerObj, args)
       -- It handles MP sync via AddXp network packet
       if fitnessXp > 0 then
         addXp(playerObj, Perks.Fitness, fitnessXp)
-        print("[RB42 ServerCommands] Server addXp() Fitness: " .. tostring(fitnessXp))
+        -- print("[RB42 ServerCommands] Server addXp() Fitness: " .. tostring(fitnessXp))
       end
       if nimbleXp > 0 then
         addXp(playerObj, Perks.Nimble, nimbleXp)
-        print("[RB42 ServerCommands] Server addXp() Nimble: " .. tostring(nimbleXp))
+        -- print("[RB42 ServerCommands] Server addXp() Nimble: " .. tostring(nimbleXp))
       end
     end
     return
@@ -103,17 +103,12 @@ local function onClientCommand(module, command, playerObj, args)
         local wheelWear = args.wheelWear or 0
         local bootWear = args.bootWear or 0
 
-        print("[RB42 ServerCommands] UpdateWear on SERVER - wheels: " .. tostring(wheelWear) .. ", boots: " .. tostring(bootWear))
+        -- print("[RB42 ServerCommands] UpdateWear on SERVER - wheels: " .. tostring(wheelWear) .. ", boots: " .. tostring(bootWear))
 
         md.rb_wheels = RB42.Clamp((md.rb_wheels or RB42.Config.WheelsMax) - wheelWear, 0, RB42.Config.WheelsMax)
         md.rb_boots = RB42.Clamp((md.rb_boots or RB42.Config.BootsMax) - bootWear, 0, RB42.Config.BootsMax)
 
-        print("[RB42 ServerCommands] New durability - wheels: " .. tostring(md.rb_wheels) .. ", boots: " .. tostring(md.rb_boots))
-
-        -- Force modData sync in multiplayer
-        if isServer() then
-          rb:transmitModData()
-        end
+        -- print("[RB42 ServerCommands] New durability - wheels: " .. tostring(md.rb_wheels) .. ", boots: " .. tostring(md.rb_boots))
       end
     end
     return
@@ -124,7 +119,7 @@ local function onClientCommand(module, command, playerObj, args)
     return
   end
 
-  print("[RB42 ServerCommands] Processing command for rbId: " .. tostring(args.rbId))
+  -- print("[RB42 ServerCommands] Processing command for rbId: " .. tostring(args.rbId))
 
   local inv = playerObj:getInventory()
   local rb = findItemById(playerObj, args.rbId)
@@ -132,14 +127,14 @@ local function onClientCommand(module, command, playerObj, args)
     print("[RB42 ServerCommands] Could not find item with ID: " .. tostring(args.rbId))
     return
   end
-  print("[RB42 ServerCommands] Found item: " .. tostring(rb:getFullType()))
+  -- print("[RB42 ServerCommands] Found item: " .. tostring(rb:getFullType()))
 
   -- init durability
   local md = RB42.GetOrInitDurability(rb)
 
   if command == "ReplaceWheels" then
-    print("[RB42] ReplaceWheels command received for item ID: " .. tostring(args.rbId))
-    print("[RB42] Current wheel durability: " .. tostring(md.rb_wheels))
+    -- print("[RB42] ReplaceWheels command received for item ID: " .. tostring(args.rbId))
+    -- print("[RB42] Current wheel durability: " .. tostring(md.rb_wheels))
 
     if inv:getCountTypeRecurse("Base.Screwdriver") <= 0 then
       print("[RB42] No screwdriver found")
@@ -151,24 +146,19 @@ local function onClientCommand(module, command, playerObj, args)
     end
 
     local consumed = consumeOne(inv, "Rollerblades42.RollerbladeWheels")
-    print("[RB42] Wheel item consumed: " .. tostring(consumed))
+    -- print("[RB42] Wheel item consumed: " .. tostring(consumed))
 
     md.rb_wheels = RB42.Config.WheelsMax
-    print("[RB42] Set wheel durability to: " .. tostring(md.rb_wheels))
+    -- print("[RB42] Set wheel durability to: " .. tostring(md.rb_wheels))
 
-    -- Force modData sync in multiplayer
-    if isServer() then
-      rb:transmitModData()
-    end
-
-    print("[RB42] Wheels replaced! Final durability: " .. tostring(rb:getModData().rb_wheels))
+    -- print("[RB42] Wheels replaced! Final durability: " .. tostring(rb:getModData().rb_wheels))
     playerObj:Say("Replaced rollerblade wheels!")
     return
   end
 
   if command == "CleanWheels" then
-    print("[RB42] CleanWheels command received for item ID: " .. tostring(args.rbId))
-    print("[RB42] Current wheel durability: " .. tostring(md.rb_wheels))
+    -- print("[RB42] CleanWheels command received for item ID: " .. tostring(args.rbId))
+    -- print("[RB42] Current wheel durability: " .. tostring(md.rb_wheels))
 
     if inv:getCountTypeRecurse("Base.Screwdriver") <= 0 then
       print("[RB42] No screwdriver found")
@@ -185,18 +175,13 @@ local function onClientCommand(module, command, playerObj, args)
 
     -- Consume AlcoholWipes (used up), keep Screwdriver and Toothbrush
     local consumed = consumeOne(inv, "Base.AlcoholWipes")
-    print("[RB42] AlcoholWipes consumed: " .. tostring(consumed))
+    -- print("[RB42] AlcoholWipes consumed: " .. tostring(consumed))
 
     -- Cleaning restores some wheels durability
     md.rb_wheels = math.min(RB42.Config.WheelsMax, (md.rb_wheels or RB42.Config.WheelsMax) + 8)
-    print("[RB42] Set wheel durability to: " .. tostring(md.rb_wheels))
+    -- print("[RB42] Set wheel durability to: " .. tostring(md.rb_wheels))
 
-    -- Force modData sync in multiplayer
-    if isServer() then
-      rb:transmitModData()
-    end
-
-    print("[RB42] Wheels cleaned! Final durability: " .. tostring(rb:getModData().rb_wheels))
+    -- print("[RB42] Wheels cleaned! Final durability: " .. tostring(rb:getModData().rb_wheels))
     playerObj:Say("Cleaned rollerblade wheels!")
     return
   end

@@ -5,7 +5,7 @@ module RB42 {
         DisabledInMultiplayer = false,
         Cost = 3,
         UIName = Rollerblader,
-        UIDescription = <LINE> 25% less fatigue drain while skating <LINE> 50% less chance to fall on stairs or while attacking.<LINE> 20% slower durability loss on rollerblade wheels and boots. <LINE>  Small XP boost to Fitness and Nimble while skating. <LINE> Start with Rollerblades,
+        UIDescription = <LINE> 25% less endurance drain while skating <LINE> 50% less chance to fall on stairs or while attacking.<LINE> 20% slower durability loss on rollerblade wheels and boots. <LINE>  Small XP boost to Fitness and Nimble while skating. <LINE> Start with Rollerblades,
         
         XPBoosts =  Nimble=1;Fitness=1;Sneak=-1,
     }
