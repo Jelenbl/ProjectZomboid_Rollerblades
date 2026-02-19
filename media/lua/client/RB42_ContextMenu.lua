@@ -1,5 +1,6 @@
 require "ISUI/ISInventoryPaneContextMenu"
 require "RB42_RollerbladesShared"
+require "RB42_WheelActions"
 
 local function isRB(item)
   return item and item.getFullType and item:getFullType() == "Rollerblades42.Rollerblades"
@@ -9,35 +10,14 @@ local function countItem(inv, fullType)
   return inv:getCountTypeRecurse(fullType)
 end
 
-local function doReplaceWheels(playerObj, inv, rbItem)
-  print("[RB42] Replace wheels called")
-  if isClient() then
-    sendClientCommand(playerObj, "RB42", "ReplaceWheels", { rbId = rbItem:getID() })
-  else
-    if countItem(inv, "Base.Screwdriver") <= 0 or countItem(inv, "Rollerblades42.RollerbladeWheels") <= 0 then return end
-    local wheel = inv:FindAndReturn("Rollerblades42.RollerbladeWheels")
-    if wheel then inv:Remove(wheel) end
-    local md = rbItem:getModData()
-    if md.rb_wheels == nil then md.rb_wheels = RB42.Config.WheelsMax end
-    md.rb_wheels = RB42.Config.WheelsMax
-    playerObj:Say("Replaced rollerblade wheels!")
-  end
+local function doReplaceWheels(playerObj, rbItem)
+  print("[RB42] Replace wheels - queuing TimedAction")
+  ISTimedActionQueue.add(ISReplaceRollerbladesWheels:new(playerObj, rbItem, 50))
 end
 
-local function doCleanWheels(playerObj, inv, rbItem)
-  print("[RB42] Clean wheels called")
-  if isClient() then
-    sendClientCommand(playerObj, "RB42", "CleanWheels", { rbId = rbItem:getID() })
-  else
-    if countItem(inv, "Base.Screwdriver") <= 0 or countItem(inv, "Base.Toothbrush") <= 0 or countItem(inv, "Base.AlcoholWipes") <= 0 then return end
-    -- Consume AlcoholWipes (used up), keep Screwdriver and Toothbrush
-    local wipes = inv:FindAndReturn("Base.AlcoholWipes")
-    if wipes then inv:Remove(wipes) end
-    local md = rbItem:getModData()
-    if md.rb_wheels == nil then md.rb_wheels = RB42.Config.WheelsMax end
-    md.rb_wheels = math.min(RB42.Config.WheelsMax, md.rb_wheels + 8)
-    playerObj:Say("Cleaned rollerblade wheels!")
-  end
+local function doCleanWheels(playerObj, rbItem)
+  print("[RB42] Clean wheels - queuing TimedAction")
+  ISTimedActionQueue.add(ISCleanRollerbladesWheels:new(playerObj, rbItem, 50))
 end
 
 local function onFillInventoryContextMenu(player, context, items)
@@ -74,7 +54,7 @@ local function onFillInventoryContextMenu(player, context, items)
   context:addOption("", nil, nil).notAvailable = true
   local hasWheels = countItem(inv, "Rollerblades42.RollerbladeWheels") > 0
   local hasScrewdriver = countItem(inv, "Base.Screwdriver") > 0
-  local opt1 = context:addOption("Replace Rollerblade Wheels", playerObj, doReplaceWheels, inv, rbItem)
+  local opt1 = context:addOption("Replace Rollerblade Wheels", playerObj, doReplaceWheels, rbItem)
   opt1.notAvailable = not (hasWheels and hasScrewdriver)
   local replaceTooltip = ISToolTip:new()
   replaceTooltip:initialise()
@@ -83,7 +63,7 @@ local function onFillInventoryContextMenu(player, context, items)
 
   local hasToothbrush = countItem(inv, "Base.Toothbrush") > 0
   local hasAlcoholWipes = countItem(inv, "Base.AlcoholWipes") > 0
-  local opt2 = context:addOption("Clean Rollerblade Wheels", playerObj, doCleanWheels, inv, rbItem)
+  local opt2 = context:addOption("Clean Rollerblade Wheels", playerObj, doCleanWheels, rbItem)
   opt2.notAvailable = not (hasScrewdriver and hasToothbrush and hasAlcoholWipes)
   local cleanTooltip = ISToolTip:new()
   cleanTooltip:initialise()

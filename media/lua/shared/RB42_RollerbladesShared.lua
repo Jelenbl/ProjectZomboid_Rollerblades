@@ -18,8 +18,8 @@ RB42.Config = {
     reductionPerNimbleLevelForStairs = 0.20,     -- 2% reduction in fall chance per nimble level on stairs
     
     -- XP System
-    FitnessXpPerTick = 0.25,  -- XP per tick while moving on rollerblades (any terrain)
-    NimbleXpPerStairsTick = 0.4,  -- XP per tick while on stairs (balance training)
+    FitnessXpPerTick = 0.05,  -- XP per tick while moving on rollerblades (any terrain)
+    NimbleXpPerStairsTick = 0.02,  -- XP per tick while on stairs (balance training)
     TraitXpBoost = 1.1,  -- 10% XP boost for Rollerblader trait
 
     -- Carpet detection: floor sprite name contains any of these
@@ -34,20 +34,20 @@ RB42.Config = {
     -- Rollerblades are roughly 2x louder due to hard wheels
     NoiseWalking    = 10,   -- Hard wheels rolling at walking pace
     NoiseRunning    = 13,   -- Fast skating, very audible
-    NoiseSneaking   = 6,   -- Can't really sneak on wheels
-    NoiseSprinting  = 17,   -- Full speed, wheels screaming
+    NoiseSneaking   = 6,    -- Can't really sneak on wheels
+    NoiseSprinting  = 15,   -- Full speed, wheels screaming
     NoiseStairs     = 14,   -- Clunking up/down stairs (overrides movement type)
-    NoiseBlocked    = 8,   -- Pushing through brush, slow but crunchy
+    NoiseBlocked    = 8,    -- Pushing through brush, slow but crunchy
     NoiseTerrainHard = 1.2, -- Multiplier: louder on concrete/asphalt
     NoiseTerrainSoft = 0.7, -- Multiplier: quieter on grass/dirt
     NoiseVolumeRatio = 0.6, -- Volume = radius * this (lower = less attractive to zombies)
 
     -- Wear per tick (per 0.25s by default)
     Wear = {
-        HardWheels = 0.003,    -- was 0.006
-        SoftWheels = 0.006,    -- was 0.012
-        StairsWheels = 0.009,  -- was 0.018
-        BlockedWheels = 0.012, -- was 0.024
+        HardWheels = 0.0015,
+        SoftWheels = 0.003,
+        StairsWheels = 0.0045,
+        BlockedWheels = 0.006,
 
         HardBoots = 0.001,
         SoftBoots = 0.002,

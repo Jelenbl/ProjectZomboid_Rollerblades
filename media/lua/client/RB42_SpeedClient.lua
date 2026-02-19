@@ -2,7 +2,7 @@
 -- Client-side speed modification for rollerblades using animation system
 -- This file detects terrain and sets animation speed variables that the XML files read
 
-print("[RB42 SpeedClient] ===== VERSION WITH NOISE SYSTEM - FEB 16 2026 =====")
+print("[RB42 SpeedClient] ===== SERVER addXp() VIA COMMAND - FEB 18 2026 =====")
 
 require "RB42_RollerbladesShared"
 
@@ -266,24 +266,23 @@ end
 -- Applies trait bonus if player has Rollerblader trait
 -- ============================================================
 local function updateXP(player, playerHasTrait, terrain)
-    
-    xpAccumulator = xpAccumulator + 0.25
-    -- print("[RB42 SpeedClient] XP accumulator:", xpAccumulator, "Player has trait:", playerHasTrait, "Terrain:", terrain)
-    if xpAccumulator >= 60.0 then
-        -- print("[RB42 SpeedClient] Updating XP. Player has trait:", playerHasTrait, "Terrain:", terrain)
-        local xpSystem = player:getXp()
-        if not xpSystem then return end
 
-        -- Check for Rollerblader trait for XP boost (safe call to prevent crash if trait not found)
+    xpAccumulator = xpAccumulator + 0.25
+    if xpAccumulator >= 60.0 then
         local xpMult = 1.0
         if playerHasTrait then
             xpMult = RB42.Config.TraitXpBoost or 1.1
         end
-        xpSystem:AddXP(Perks.Fitness, RB42.Config.FitnessXpPerTick * xpMult)
 
-        if terrain == "stairs" then
-            xpSystem:AddXP(Perks.Nimble, RB42.Config.NimbleXpPerStairsTick * xpMult)
-        end
+        local fitnessXp = RB42.Config.FitnessXpPerTick * xpMult
+        local nimbleXp = (terrain == "stairs") and (RB42.Config.NimbleXpPerStairsTick * xpMult) or 0
+
+        -- Send XP request to server - addXp() only works in server context
+        print("[RB42 SpeedClient] Sending XP request to server - Fitness: " .. fitnessXp .. ", Nimble: " .. nimbleXp)
+        sendClientCommand("RB42", "RequestXP", {
+            fitnessXp = fitnessXp,
+            nimbleXp = nimbleXp
+        })
 
         xpAccumulator = 0
     end
@@ -334,11 +333,12 @@ end
 -- ============================================================
 -- Subsystem: Durability wear
 -- Uses outer wearAccumulator/wheelsBlown via closure
+-- Sends wear updates to server for MP sync
 -- ============================================================
 local function updateWear(player, rbItem, terrain, playerHasTrait)
     wearAccumulator = wearAccumulator + 0.25
 
-    if wearAccumulator >= 10.0 then
+    if wearAccumulator >= 15.0 then
         local md = rbItem:getModData()
         if md then
             local wheelWear = 0
@@ -364,8 +364,21 @@ local function updateWear(player, rbItem, terrain, playerHasTrait)
                 bootWear = bootWear * 0.8
             end
 
-            md.rb_wheels = RB42.Clamp((md.rb_wheels or RB42.Config.WheelsMax) - (wheelWear * 10), 0, RB42.Config.WheelsMax)
-            md.rb_boots = RB42.Clamp((md.rb_boots or RB42.Config.BootsMax) - (bootWear * 10), 0, RB42.Config.BootsMax)
+            -- Calculate final wear amounts
+            local wheelWearAmount = wheelWear * 10
+            local bootWearAmount = bootWear * 10
+
+            -- Send wear update to server for MP sync
+            print("[RB42 SpeedClient] Sending wear update to server - wheels: " .. wheelWearAmount .. ", boots: " .. bootWearAmount)
+            sendClientCommand("RB42", "UpdateWear", {
+                rbId = rbItem:getID(),
+                wheelWear = wheelWearAmount,
+                bootWear = bootWearAmount
+            })
+
+            -- Also update locally for immediate feedback (server will sync authoritative values)
+            md.rb_wheels = RB42.Clamp((md.rb_wheels or RB42.Config.WheelsMax) - wheelWearAmount, 0, RB42.Config.WheelsMax)
+            md.rb_boots = RB42.Clamp((md.rb_boots or RB42.Config.BootsMax) - bootWearAmount, 0, RB42.Config.BootsMax)
 
             if md.rb_wheels <= 0 and not wheelsBlown then
                 wheelsBlown = true
