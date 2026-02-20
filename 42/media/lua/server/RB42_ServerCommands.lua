@@ -43,7 +43,7 @@ local function findItemById(playerObj, id)
   -- Check inventory first
   local rbInInv = inv:getFirstTypeRecurse("Rollerblades42.Rollerblades")
   if rbInInv then
-    print("[RB42 ServerCommands] Found rollerblades by type in inventory (ID fallback)")
+    -- print("[RB42 ServerCommands] Found rollerblades by type in inventory (ID fallback)")
     return rbInInv
   end
 
@@ -52,7 +52,7 @@ local function findItemById(playerObj, id)
     for i = 0, worn:size() - 1 do
       local it = worn:get(i):getItem()
       if it and it:getFullType() == "Rollerblades42.Rollerblades" then
-        print("[RB42 ServerCommands] Found rollerblades by type in worn items (ID fallback)")
+        -- print("[RB42 ServerCommands] Found rollerblades by type in worn items (ID fallback)")
         return it
       end
     end
@@ -68,7 +68,7 @@ local function consumeOne(inv, fullType)
 end
 
 local function onClientCommand(module, command, playerObj, args)
-  print("[RB42 ServerCommands] onClientCommand called - module: " .. tostring(module) .. ", command: " .. tostring(command))
+  -- print("[RB42 ServerCommands] onClientCommand called - module: " .. tostring(module) .. ", command: " .. tostring(command))
   if module ~= "RB42" then return end
   if not playerObj then return end
 
@@ -78,7 +78,7 @@ local function onClientCommand(module, command, playerObj, args)
       local fitnessXp = args.fitnessXp or 0
       local nimbleXp = args.nimbleXp or 0
 
-      print("[RB42 ServerCommands] Using addXp() on SERVER - fitness: " .. tostring(fitnessXp) .. ", nimble: " .. tostring(nimbleXp))
+      -- print("[RB42 ServerCommands] Using addXp() on SERVER - fitness: " .. tostring(fitnessXp) .. ", nimble: " .. tostring(nimbleXp))
 
       -- addXp() is the vanilla global function used in shared code
       -- It handles MP sync via AddXp network packet
@@ -124,7 +124,7 @@ local function onClientCommand(module, command, playerObj, args)
   local inv = playerObj:getInventory()
   local rb = findItemById(playerObj, args.rbId)
   if not rb then
-    print("[RB42 ServerCommands] Could not find item with ID: " .. tostring(args.rbId))
+    -- print("[RB42 ServerCommands] Could not find item with ID: " .. tostring(args.rbId))
     return
   end
   -- print("[RB42 ServerCommands] Found item: " .. tostring(rb:getFullType()))

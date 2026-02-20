@@ -12,7 +12,6 @@ Events.OnGameStart.Add(function()
         "setMoveSpeed",
         "setMovementSpeed",
         "setEnduranceSpeedMod",
-        "setFatigueSpeedMod",
         "setFitnessSpeedMod",
         "setPanicSpeedMod",
         "setSneakSpeedMod",

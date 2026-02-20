@@ -14,7 +14,7 @@ local function RegisterRB42SandboxOptions()
     -- Register all mod options
     SandboxVars.RB42 = SandboxVars.RB42 or {}
     -- Example: set defaults if not present
-    SandboxVars.RB42.SpeedHard = getOption("SpeedHard", 1.5)
+    SandboxVars.RB42.SpeedHard = getOption("SpeedHard", 1.00)
     SandboxVars.RB42.SpeedSoft = getOption("SpeedSoft", 0.75)
     SandboxVars.RB42.SpeedStairs = getOption("SpeedStairs", 0.3)
     SandboxVars.RB42.SpeedBlocked = getOption("SpeedBlocked", 0.3)
@@ -34,5 +34,3 @@ local function RegisterRB42SandboxOptions()
 end
 
 Events.OnInitWorld.Add(RegisterRB42SandboxOptions)
-
-print("[RB42 SandboxOptions] SandboxOptions.lua loaded!")
