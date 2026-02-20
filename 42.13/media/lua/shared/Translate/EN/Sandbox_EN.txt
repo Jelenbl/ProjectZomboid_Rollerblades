@@ -188,15 +188,9 @@ Sandbox_EN = {
     Sandbox_Rollerblades42_ToothbrushRefundAt10 = "Toothbrush Refund (Skill 10)",
     Sandbox_Rollerblades42_ToothbrushRefundAt10_tooltip = "Chance to not consume toothbrush at Mechanics 10. Default: 0.60 (60%)",
 
-    Sandbox_Rollerblades42_GreaseRefundAt0 = "Grease Refund (Skill 0)",
-    Sandbox_Rollerblades42_GreaseRefundAt0_tooltip = "Chance to not consume grease at Mechanics 0. Default: 0.05 (5%)",
+    Sandbox_Rollerblades42_AlcoholRefundAt0 = "Alcohol Wipes Refund (Skill 0)",
+    Sandbox_Rollerblades42_AlcoholRefundAt0_tooltip = "Chance to not consume alcohol wipes at Mechanics 0. Default: 0.10 (10%)",
 
-    Sandbox_Rollerblades42_GreaseRefundAt10 = "Grease Refund (Skill 10)",
-    Sandbox_Rollerblades42_GreaseRefundAt10_tooltip = "Chance to not consume grease at Mechanics 10. Default: 0.55 (55%)",
-
-    Sandbox_Rollerblades42_AlcoholRefundAt0 = "Alcohol Refund (Skill 0)",
-    Sandbox_Rollerblades42_AlcoholRefundAt0_tooltip = "Chance to not consume rubbing alcohol at Mechanics 0. Default: 0.10 (10%)",
-
-    Sandbox_Rollerblades42_AlcoholRefundAt10 = "Alcohol Refund (Skill 10)",
-    Sandbox_Rollerblades42_AlcoholRefundAt10_tooltip = "Chance to not consume rubbing alcohol at Mechanics 10. Default: 0.70 (70%)",
+    Sandbox_Rollerblades42_AlcoholRefundAt10 = "Alcohol Wipes Refund (Skill 10)",
+    Sandbox_Rollerblades42_AlcoholRefundAt10_tooltip = "Chance to not consume alcohol wipes at Mechanics 10. Default: 0.70 (70%)",
 }

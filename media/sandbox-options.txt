@@ -4,17 +4,17 @@ option Rollerblades42.DividerSpeed
 {
     type = boolean,
     default = false,
-    page = Rollerblades,
+    page = Rollerblades42,
     translation = Rollerblades42_DividerSpeed,
 }
 
 option Rollerblades42.SpeedHard
 {
     type = double,
-    default = 1.5,
+    default = 1.25,
     min = 0.5,
     max = 3.0,
-    page = Rollerblades,
+    page = Rollerblades42,
     translation = Rollerblades42_SpeedHard,
 }
 
@@ -24,7 +24,7 @@ option Rollerblades42.SpeedSoft
     default = 0.75,
     min = 0.1,
     max = 2.0,
-    page = Rollerblades,
+    page = Rollerblades42,
     translation = Rollerblades42_SpeedSoft,
 }
 
@@ -34,7 +34,7 @@ option Rollerblades42.SpeedStairs
     default = 0.30,
     min = 0.1,
     max = 1.0,
-    page = Rollerblades,
+    page = Rollerblades42,
     translation = Rollerblades42_SpeedStairs,
 }
 
@@ -44,7 +44,7 @@ option Rollerblades42.SpeedBlocked
     default = 0.30,
     min = 0.1,
     max = 1.0,
-    page = Rollerblades,
+    page = Rollerblades42,
     translation = Rollerblades42_SpeedBlocked,
 }
 
@@ -52,7 +52,7 @@ option Rollerblades42.DividerFallTrip
 {
     type = boolean,
     default = false,
-    page = Rollerblades,
+    page = Rollerblades42,
     translation = Rollerblades42_DividerFallTrip,
 }
 
@@ -62,7 +62,7 @@ option Rollerblades42.FallChanceStairs
     default = 2.0,
     min = 0.0,
     max = 20.0,
-    page = Rollerblades,
+    page = Rollerblades42,
     translation = Rollerblades42_FallChanceStairs,
 }
 
@@ -72,7 +72,7 @@ option Rollerblades42.FallChanceAttack
     default = 10,
     min = 0,
     max = 50,
-    page = Rollerblades,
+    page = Rollerblades42,
     translation = Rollerblades42_FallChanceAttack,
 }
 
@@ -82,7 +82,7 @@ option Rollerblades42.NimbleReductionAttack
     default = 1.0,
     min = 0.0,
     max = 5.0,
-    page = Rollerblades,
+    page = Rollerblades42,
     translation = Rollerblades42_NimbleReductionAttack,
 }
 
@@ -92,7 +92,7 @@ option Rollerblades42.NimbleReductionStairs
     default = 0.20,
     min = 0.0,
     max = 2.0,
-    page = Rollerblades,
+    page = Rollerblades42,
     translation = Rollerblades42_NimbleReductionStairs,
 }
 
@@ -102,7 +102,7 @@ option Rollerblades42.TripBaseChance
     default = 0.025,
     min = 0.0,
     max = 0.5,
-    page = Rollerblades,
+    page = Rollerblades42,
     translation = Rollerblades42_TripBaseChance,
 }
 
@@ -112,7 +112,7 @@ option Rollerblades42.TripNimbleReduction
     default = 0.06,
     min = 0.0,
     max = 0.2,
-    page = Rollerblades,
+    page = Rollerblades42,
     translation = Rollerblades42_TripNimbleReduction,
 }
 
@@ -122,7 +122,7 @@ option Rollerblades42.TripMinMultiplier
     default = 0.35,
     min = 0.0,
     max = 1.0,
-    page = Rollerblades,
+    page = Rollerblades42,
     translation = Rollerblades42_TripMinMultiplier,
 }
 
@@ -130,7 +130,7 @@ option Rollerblades42.DividerXP
 {
     type = boolean,
     default = false,
-    page = Rollerblades,
+    page = Rollerblades42,
     translation = Rollerblades42_DividerXP,
 }
 
@@ -140,7 +140,7 @@ option Rollerblades42.FitnessXpPerTick
     default = 0.05,
     min = 0.0,
     max = 1.0,
-    page = Rollerblades,
+    page = Rollerblades42,
     translation = Rollerblades42_FitnessXpPerTick,
 }
 
@@ -150,7 +150,7 @@ option Rollerblades42.NimbleXpPerStairsTick
     default = 0.02,
     min = 0.0,
     max = 1.0,
-    page = Rollerblades,
+    page = Rollerblades42,
     translation = Rollerblades42_NimbleXpPerStairsTick,
 }
 
@@ -160,7 +160,7 @@ option Rollerblades42.TraitXpBoost
     default = 1.1,
     min = 1.0,
     max = 2.0,
-    page = Rollerblades,
+    page = Rollerblades42,
     translation = Rollerblades42_TraitXpBoost,
 }
 
@@ -168,7 +168,7 @@ option Rollerblades42.DividerDurability
 {
     type = boolean,
     default = false,
-    page = Rollerblades,
+    page = Rollerblades42,
     translation = Rollerblades42_DividerDurability,
 }
 
@@ -178,7 +178,7 @@ option Rollerblades42.BootsMax
     default = 60,
     min = 10,
     max = 500,
-    page = Rollerblades,
+    page = Rollerblades42,
     translation = Rollerblades42_BootsMax,
 }
 
@@ -188,7 +188,7 @@ option Rollerblades42.WheelsMax
     default = 30,
     min = 5,
     max = 200,
-    page = Rollerblades,
+    page = Rollerblades42,
     translation = Rollerblades42_WheelsMax,
 }
 
@@ -198,7 +198,7 @@ option Rollerblades42.WearHardWheels
     default = 0.0015,
     min = 0.0,
     max = 0.1,
-    page = Rollerblades,
+    page = Rollerblades42,
     translation = Rollerblades42_WearHardWheels,
 }
 
@@ -208,7 +208,7 @@ option Rollerblades42.WearSoftWheels
     default = 0.003,
     min = 0.0,
     max = 0.1,
-    page = Rollerblades,
+    page = Rollerblades42,
     translation = Rollerblades42_WearSoftWheels,
 }
 
@@ -218,7 +218,7 @@ option Rollerblades42.WearStairsWheels
     default = 0.0045,
     min = 0.0,
     max = 0.1,
-    page = Rollerblades,
+    page = Rollerblades42,
     translation = Rollerblades42_WearStairsWheels,
 }
 
@@ -228,7 +228,7 @@ option Rollerblades42.WearBlockedWheels
     default = 0.006,
     min = 0.0,
     max = 0.1,
-    page = Rollerblades,
+    page = Rollerblades42,
     translation = Rollerblades42_WearBlockedWheels,
 }
 
@@ -238,7 +238,7 @@ option Rollerblades42.WearHardBoots
     default = 0.001,
     min = 0.0,
     max = 0.1,
-    page = Rollerblades,
+    page = Rollerblades42,
     translation = Rollerblades42_WearHardBoots,
 }
 
@@ -248,7 +248,7 @@ option Rollerblades42.WearSoftBoots
     default = 0.002,
     min = 0.0,
     max = 0.1,
-    page = Rollerblades,
+    page = Rollerblades42,
     translation = Rollerblades42_WearSoftBoots,
 }
 
@@ -258,7 +258,7 @@ option Rollerblades42.WearStairsBoots
     default = 0.003,
     min = 0.0,
     max = 0.1,
-    page = Rollerblades,
+    page = Rollerblades42,
     translation = Rollerblades42_WearStairsBoots,
 }
 
@@ -268,7 +268,7 @@ option Rollerblades42.WearBlockedBoots
     default = 0.004,
     min = 0.0,
     max = 0.1,
-    page = Rollerblades,
+    page = Rollerblades42,
     translation = Rollerblades42_WearBlockedBoots,
 }
 
@@ -276,7 +276,7 @@ option Rollerblades42.DividerNoise
 {
     type = boolean,
     default = false,
-    page = Rollerblades,
+    page = Rollerblades42,
     translation = Rollerblades42_DividerNoise,
 }
 
@@ -286,7 +286,7 @@ option Rollerblades42.NoiseMultiplier
     default = 1.2,
     min = 0.5,
     max = 3.0,
-    page = Rollerblades,
+    page = Rollerblades42,
     translation = Rollerblades42_NoiseMultiplier,
 }
 
@@ -296,7 +296,7 @@ option Rollerblades42.NoiseWalking
     default = 10,
     min = 0,
     max = 50,
-    page = Rollerblades,
+    page = Rollerblades42,
     translation = Rollerblades42_NoiseWalking,
 }
 
@@ -306,7 +306,7 @@ option Rollerblades42.NoiseRunning
     default = 13,
     min = 0,
     max = 50,
-    page = Rollerblades,
+    page = Rollerblades42,
     translation = Rollerblades42_NoiseRunning,
 }
 
@@ -316,7 +316,7 @@ option Rollerblades42.NoiseSneaking
     default = 6,
     min = 0,
     max = 30,
-    page = Rollerblades,
+    page = Rollerblades42,
     translation = Rollerblades42_NoiseSneaking,
 }
 
@@ -326,7 +326,7 @@ option Rollerblades42.NoiseSprinting
     default = 15,
     min = 0,
     max = 60,
-    page = Rollerblades,
+    page = Rollerblades42,
     translation = Rollerblades42_NoiseSprinting,
 }
 
@@ -336,7 +336,7 @@ option Rollerblades42.NoiseStairs
     default = 14,
     min = 0,
     max = 50,
-    page = Rollerblades,
+    page = Rollerblades42,
     translation = Rollerblades42_NoiseStairs,
 }
 
@@ -346,7 +346,7 @@ option Rollerblades42.NoiseBlocked
     default = 8,
     min = 0,
     max = 40,
-    page = Rollerblades,
+    page = Rollerblades42,
     translation = Rollerblades42_NoiseBlocked,
 }
 
@@ -356,7 +356,7 @@ option Rollerblades42.NoiseTerrainHard
     default = 1.2,
     min = 0.5,
     max = 3.0,
-    page = Rollerblades,
+    page = Rollerblades42,
     translation = Rollerblades42_NoiseTerrainHard,
 }
 
@@ -366,7 +366,7 @@ option Rollerblades42.NoiseTerrainSoft
     default = 0.7,
     min = 0.1,
     max = 2.0,
-    page = Rollerblades,
+    page = Rollerblades42,
     translation = Rollerblades42_NoiseTerrainSoft,
 }
 
@@ -376,7 +376,7 @@ option Rollerblades42.NoiseVolumeRatio
     default = 0.6,
     min = 0.1,
     max = 2.0,
-    page = Rollerblades,
+    page = Rollerblades42,
     translation = Rollerblades42_NoiseVolumeRatio,
 }
 
@@ -384,7 +384,7 @@ option Rollerblades42.DividerEndurance
 {
     type = boolean,
     default = false,
-    page = Rollerblades,
+    page = Rollerblades42,
     translation = Rollerblades42_DividerEndurance,
 }
 
@@ -394,7 +394,7 @@ option Rollerblades42.WalkEnduranceDrain
     default = 0.0075,
     min = 0.0,
     max = 0.1,
-    page = Rollerblades,
+    page = Rollerblades42,
     translation = Rollerblades42_WalkEnduranceDrain,
 }
 
@@ -404,7 +404,7 @@ option Rollerblades42.RunEnduranceDrain
     default = 0.005,
     min = 0.0,
     max = 0.1,
-    page = Rollerblades,
+    page = Rollerblades42,
     translation = Rollerblades42_RunEnduranceDrain,
 }
 
@@ -414,7 +414,7 @@ option Rollerblades42.StairsEnduranceMultiplier
     default = 1.75,
     min = 1.0,
     max = 5.0,
-    page = Rollerblades,
+    page = Rollerblades42,
     translation = Rollerblades42_StairsEnduranceMultiplier,
 }
 
@@ -424,7 +424,7 @@ option Rollerblades42.BlockedEnduranceMultiplier
     default = 2.5,
     min = 1.0,
     max = 10.0,
-    page = Rollerblades,
+    page = Rollerblades42,
     translation = Rollerblades42_BlockedEnduranceMultiplier,
 }
 
@@ -434,7 +434,7 @@ option Rollerblades42.TraitEnduranceReduction
     default = 0.25,
     min = 0.0,
     max = 1.0,
-    page = Rollerblades,
+    page = Rollerblades42,
     translation = Rollerblades42_TraitEnduranceReduction,
 }
 
@@ -442,7 +442,7 @@ option Rollerblades42.DividerRepair
 {
     type = boolean,
     default = false,
-    page = Rollerblades,
+    page = Rollerblades42,
     translation = Rollerblades42_DividerRepair,
 }
 
@@ -452,7 +452,7 @@ option Rollerblades42.WheelsMinPctAt0
     default = 0.20,
     min = 0.0,
     max = 1.0,
-    page = Rollerblades,
+    page = Rollerblades42,
     translation = Rollerblades42_WheelsMinPctAt0,
 }
 
@@ -462,7 +462,7 @@ option Rollerblades42.WheelsMaxPctAt0
     default = 0.35,
     min = 0.0,
     max = 1.0,
-    page = Rollerblades,
+    page = Rollerblades42,
     translation = Rollerblades42_WheelsMaxPctAt0,
 }
 
@@ -472,7 +472,7 @@ option Rollerblades42.WheelsMinPctAt10
     default = 0.70,
     min = 0.0,
     max = 1.0,
-    page = Rollerblades,
+    page = Rollerblades42,
     translation = Rollerblades42_WheelsMinPctAt10,
 }
 
@@ -482,7 +482,7 @@ option Rollerblades42.WheelsMaxPctAt10
     default = 0.90,
     min = 0.0,
     max = 1.0,
-    page = Rollerblades,
+    page = Rollerblades42,
     translation = Rollerblades42_WheelsMaxPctAt10,
 }
 
@@ -492,7 +492,7 @@ option Rollerblades42.BootsBonusMin
     default = 0.5,
     min = 0.0,
     max = 5.0,
-    page = Rollerblades,
+    page = Rollerblades42,
     translation = Rollerblades42_BootsBonusMin,
 }
 
@@ -502,7 +502,7 @@ option Rollerblades42.BootsBonusMax
     default = 2.0,
     min = 0.0,
     max = 10.0,
-    page = Rollerblades,
+    page = Rollerblades42,
     translation = Rollerblades42_BootsBonusMax,
 }
 
@@ -512,7 +512,7 @@ option Rollerblades42.ToothbrushRefundAt0
     default = 0.10,
     min = 0.0,
     max = 1.0,
-    page = Rollerblades,
+    page = Rollerblades42,
     translation = Rollerblades42_ToothbrushRefundAt0,
 }
 
@@ -522,28 +522,8 @@ option Rollerblades42.ToothbrushRefundAt10
     default = 0.60,
     min = 0.0,
     max = 1.0,
-    page = Rollerblades,
+    page = Rollerblades42,
     translation = Rollerblades42_ToothbrushRefundAt10,
-}
-
-option Rollerblades42.GreaseRefundAt0
-{
-    type = double,
-    default = 0.05,
-    min = 0.0,
-    max = 1.0,
-    page = Rollerblades,
-    translation = Rollerblades42_GreaseRefundAt0,
-}
-
-option Rollerblades42.GreaseRefundAt10
-{
-    type = double,
-    default = 0.55,
-    min = 0.0,
-    max = 1.0,
-    page = Rollerblades,
-    translation = Rollerblades42_GreaseRefundAt10,
 }
 
 option Rollerblades42.AlcoholRefundAt0
@@ -552,7 +532,7 @@ option Rollerblades42.AlcoholRefundAt0
     default = 0.10,
     min = 0.0,
     max = 1.0,
-    page = Rollerblades,
+    page = Rollerblades42,
     translation = Rollerblades42_AlcoholRefundAt0,
 }
 
@@ -562,6 +542,6 @@ option Rollerblades42.AlcoholRefundAt10
     default = 0.70,
     min = 0.0,
     max = 1.0,
-    page = Rollerblades,
+    page = Rollerblades42,
     translation = Rollerblades42_AlcoholRefundAt10,
 }
