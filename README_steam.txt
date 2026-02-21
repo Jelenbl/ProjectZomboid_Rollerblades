@@ -7,7 +7,7 @@ A fully-featured mod that adds functional rollerblades to Project Zomboid with t
 
 [h1]Features[/h1]
 
-[b]Animation[/b]
+[b]Animation (NEW)[/b]
 
 [b]Sandbox Config Options (NEW)[/b]
 
@@ -23,10 +23,10 @@ A 3-point positive trait that gives you a head start on skating:
 
 [b]Dynamic Speed System[/b]
 [list]
-[*][b]Hard surfaces[/b] (concrete, asphalt, indoor floors, streets): [color=green]+~25% speed boost[/color]
-[*][b]Soft surfaces[/b] (grass, vegetation, carpet): [color=orange]-25% speed[/color]
-[*][b]Stairs[/b]: [color=red]-70% speed[/color] (dangerous!)
-[*][b]Blocked[/b] (trees, bushes, hedges): [color=red]-70% speed[/color] — pushing through vegetation is brutal
+[*][b]Hard surfaces[/b] (concrete, asphalt, indoor floors, streets): +~25% speed boost
+[*][b]Soft surfaces[/b] (grass, vegetation, carpet): -25% speed
+[*][b]Stairs[/b]: -70% speed (dangerous!)
+[*][b]Blocked[/b] (trees, bushes, hedges): -70% speed — pushing through vegetation is brutal
 [/list]
 
 [b]Stairs Danger System[/b]
@@ -241,7 +241,7 @@ Actions are instant!
 [list]
 [*][b]Mod by[/b]: GingerVitis55
 [*][b]Build[/b]: Project Zomboid Build 42
-[*][b]Animation Assitance[/b]: RedChili
+[*][b]Animation Assitance and OG design[/b]: RedChili
 [/list]
 
 ---------------------------------------------------------

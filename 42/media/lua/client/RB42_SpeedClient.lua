@@ -379,14 +379,6 @@ local function updateWear(player, rbItem, terrain, playerHasTrait)
             -- Also update locally for immediate feedback (server will sync authoritative values)
             md.rb_wheels = RB42.Clamp((md.rb_wheels or RB42.Config.WheelsMax) - wheelWearAmount, 0, RB42.Config.WheelsMax)
             md.rb_boots = RB42.Clamp((md.rb_boots or RB42.Config.BootsMax) - bootWearAmount, 0, RB42.Config.BootsMax)
-
-            if md.rb_wheels <= 0 and not wheelsBlown then
-                wheelsBlown = true
-                fallOnStairs(player)
-                if player.Say then
-                    player:Say("My rollerblade wheels are shot!")
-                end
-            end
         end
 
         wearAccumulator = 0
@@ -436,6 +428,37 @@ Events.OnPlayerUpdate.Add(function(player)
         RB42.GetOrInitDurability(rbItem)
         if not player or player:isDead() then return end
 
+        -- Check if wheels are broken - if so, treat as not wearing rollerblades
+        local md = rbItem:getModData()
+        local wheelsAreBroken = (md and md.rb_wheels ~= nil and md.rb_wheels <= 0)
+
+        if wheelsAreBroken then
+            -- Wheels are broken - behave like normal boots
+            player:setVariable("RollerbladesActive", false)
+            player:setVariable("RollerbladesWalkSpeed", 1.0)
+            player:setVariable("RollerbladesRunSpeed", 1.0)
+            player:setVariable("RollerbladesSpeed", 1.0)
+
+            -- Reset speed to normal
+            local pmd = player:getModData()
+            if pmd.rb42_baseSpeedMod ~= nil then
+                player:setSpeedMod(pmd.rb42_baseSpeedMod)
+            end
+
+            -- Reset state
+            if not wheelsBlown then
+                wheelsBlown = true
+                fallOnStairs(player)
+                if player.Say then
+                    player:Say("My rollerblade wheels are shot!")
+                end
+            end
+
+            return
+        end
+
+        -- Wheels are functional - proceed with normal rollerblade behavior
+        wheelsBlown = false
         local terrain = getTerrainType(player)
         if not player or player:isDead() then return end
 
@@ -479,7 +502,7 @@ Events.OnPlayerUpdate.Add(function(player)
                     xpAccumulator = 0
                 end
             end
-            
+
                 wearAccumulator = 0
                 noiseAccumulator = 0
         end
@@ -487,10 +510,7 @@ Events.OnPlayerUpdate.Add(function(player)
         -- SPEED MULTIPLIER
         local speedMult = 1.0
 
-        local md = rbItem:getModData()
-        if md and md.rb_wheels ~= nil and md.rb_wheels <= 0 then
-            speedMult = 1.0
-        elseif terrain == "blocked" then
+        if terrain == "blocked" then
             speedMult = RB42.Config.SpeedBlocked
         elseif terrain == "hard" then
             speedMult = RB42.Config.SpeedHard
