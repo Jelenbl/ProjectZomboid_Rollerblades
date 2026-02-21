@@ -1,6 +1,9 @@
 -- we need our registry to check for the trait
 
 local function addItemOnSpawn(player)
+    -- only run on server side to prevent duplicates in multiplayer
+    if not isServer() then return end
+
     -- check for the trait using the registry key
     if player:hasTrait(RB42.CharacterTrait.Rollerblader) then
         -- add rollerblades to the player's inventory
@@ -9,6 +12,5 @@ local function addItemOnSpawn(player)
     end
 end
 
--- run our function when the OnNewGame event is triggered
---  contrary to the name, this event is triggered any time you create a new character, not just in new worlds
-Events.OnNewGame.Add(addItemOnSpawn)
+-- run our function when a player is created (including after death in existing worlds)
+Events.OnCreatePlayer.Add(addItemOnSpawn)

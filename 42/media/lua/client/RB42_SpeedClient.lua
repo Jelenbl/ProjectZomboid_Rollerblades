@@ -2,7 +2,7 @@
 -- Client-side speed modification for rollerblades using animation system
 -- This file detects terrain and sets animation speed variables that the XML files read
 
-print("[RB42 SpeedClient] ===== SERVER addXp() VIA COMMAND - FEB 18 2026 =====")
+print("[RB42 SpeedClient] ===== ANNIMATION UPDATE - FEB 18 2026 =====")
 
 require "RB42_RollerbladesShared"
 
@@ -278,7 +278,7 @@ local function updateXP(player, playerHasTrait, terrain)
         local nimbleXp = (terrain == "stairs") and (RB42.Config.NimbleXpPerStairsTick * xpMult) or 0
 
         -- Send XP request to server - addXp() only works in server context
-        print("[RB42 SpeedClient] Sending XP request to server - Fitness: " .. fitnessXp .. ", Nimble: " .. nimbleXp)
+        -- print("[RB42 SpeedClient] Sending XP request to server - Fitness: " .. fitnessXp .. ", Nimble: " .. nimbleXp)
         sendClientCommand("RB42", "RequestXP", {
             fitnessXp = fitnessXp,
             nimbleXp = nimbleXp
@@ -369,7 +369,7 @@ local function updateWear(player, rbItem, terrain, playerHasTrait)
             local bootWearAmount = bootWear * 10
 
             -- Send wear update to server for MP sync
-            print("[RB42 SpeedClient] Sending wear update to server - wheels: " .. wheelWearAmount .. ", boots: " .. bootWearAmount)
+            -- print("[RB42 SpeedClient] Sending wear update to server - wheels: " .. wheelWearAmount .. ", boots: " .. bootWearAmount)
             sendClientCommand("RB42", "UpdateWear", {
                 rbId = rbItem:getID(),
                 wheelWear = wheelWearAmount,
@@ -398,28 +398,28 @@ end
 -- ============================================================
 local function updateEndurance(player, terrain, playerHasTrait)
     local stats = player:getStats()
-    if not stats or stats.Fatigue == nil then return end
+    if not stats or stats.Endurance == nil then return end
 
     local drainAmount = 0
 
     if player:isRunning() then
-        drainAmount = 0.015
+        drainAmount = RB42.Config.walkEnduranceDrain
     else
-        drainAmount = 0.01
+        drainAmount = RB42.Config.runEnduranceDrain
     end
 
     if terrain == "stairs" then
-        drainAmount = drainAmount * 1.75
+        drainAmount = drainAmount * RB42.Config.stairsEnduranceMultiplier
     elseif terrain == "blocked" then
-        drainAmount = drainAmount * 2.5
+        drainAmount = drainAmount * RB42.Config.blockedEnduranceMultiplier
     end
 
-    -- Apply 25% fatigue reduction if player has Rollerblader trait
+    -- Apply 25% endurance reduction if player has Rollerblader trait
     if playerHasTrait then
-        drainAmount = drainAmount * 0.75
+        drainAmount = drainAmount * RB42.Config.traitEnduranceReduction
     end
 
-    stats.Fatigue = math.min(1.0, stats.Fatigue + drainAmount)
+    stats.Endurance = math.max(0, stats.Endurance - drainAmount)
 end
 
 -- ============================================================
@@ -439,18 +439,6 @@ Events.OnPlayerUpdate.Add(function(player)
         local terrain = getTerrainType(player)
         if not player or player:isDead() then return end
 
-        -- STAIRS FALL CHECK
-        if terrain == "stairs" then
-            stairsTimer = stairsTimer + 1
-            if stairsTimer - lastFallCheck >= 30 then
-                lastFallCheck = stairsTimer
-                checkStairFall(player, playerHasTrait)
-            end
-        else
-            stairsTimer = 0
-            lastFallCheck = 0
-        end
-
         -- ATTACK FALL CHECK
         if player:isAttacking() and not isAttacking then
             isAttacking = true
@@ -462,6 +450,19 @@ Events.OnPlayerUpdate.Add(function(player)
 
         -- IS PLAYER ACTUALLY MOVING?
         local isActuallyMoving = (player:getX() ~= player:getLastX() or player:getY() ~= player:getLastY())
+
+        -- STAIRS FALL CHECK (only when moving)
+        if terrain == "stairs" and isActuallyMoving then
+            stairsTimer = stairsTimer + 1
+            if stairsTimer - lastFallCheck >= 30 then
+                lastFallCheck = stairsTimer
+                checkStairFall(player, playerHasTrait)
+            end
+        elseif terrain ~= "stairs" then
+            stairsTimer = 0
+            lastFallCheck = 0
+        end
+        -- Note: if on stairs but not moving, we preserve the timer but don't increment it
 
         if isActuallyMoving then
             stoppedTimer = 0  -- Reset stopped timer when moving

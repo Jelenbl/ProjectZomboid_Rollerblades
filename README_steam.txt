@@ -7,10 +7,14 @@ A fully-featured mod that adds functional rollerblades to Project Zomboid with t
 
 [h1]Features[/h1]
 
+[b]Animation[/b]
+
+[b]Sandbox Config Options (NEW)[/b]
+
 [b]Rollerblader Trait (NEW!)[/b]
 A 3-point positive trait that gives you a head start on skating:
 [list]
-[*][b]25% less fatigue drain[/b] while skating
+[*][b]25% less endurance drain[/b] while skating
 [*][b]50% less fall chance[/b] on stairs and while attacking
 [*][b]20% slower durability loss[/b] on wheels and boots
 [*][b]10% XP boost[/b] to Fitness and Nimble while skating
@@ -19,8 +23,8 @@ A 3-point positive trait that gives you a head start on skating:
 
 [b]Dynamic Speed System[/b]
 [list]
-[*][b]Hard surfaces[/b] (concrete, asphalt, indoor floors, streets): [color=green]+50% speed boost[/color]
-[*][b]Soft surfaces[/b] (grass, vegetation, carpet): [color=orange]25% speed[/color]
+[*][b]Hard surfaces[/b] (concrete, asphalt, indoor floors, streets): [color=green]+~25% speed boost[/color]
+[*][b]Soft surfaces[/b] (grass, vegetation, carpet): [color=orange]-25% speed[/color]
 [*][b]Stairs[/b]: [color=red]-70% speed[/color] (dangerous!)
 [*][b]Blocked[/b] (trees, bushes, hedges): [color=red]-70% speed[/color] — pushing through vegetation is brutal
 [/list]
@@ -31,12 +35,12 @@ A 3-point positive trait that gives you a head start on skating:
 [*][b]Minor injuries[/b]: 1-4 damage to limbs, rare fractures (2% chance)
 [*][b]Nimble skill reduces falls[/b]: Each level reduces fall chance by 0.20% (max 2% reduction)
 [*][b]Heavy inventory[/b] (+5% fall chance when carrying >20 weight)
+[*][b]Fall risk Stairs[/b]: 2% chance per Attack
+[*][b]Stairs Mitigation[/b]: 0.2% reduction per nimble level
 [/list]
 
 [b]Attack System[/b]
 [list]
-[*][b]Fall risk Stairs[/b]: 2% chance per Attack
-[*][b]Stairs Mitigation[/b]: 0.2% reduction per nimble level
 [*][b]Fall risk Attack[/b]: 10% chance per Attack
 [*][b]Attack Mitigation[/b]: 1% reduction per nimble level
 [/list]
@@ -52,18 +56,18 @@ A 3-point positive trait that gives you a head start on skating:
 
 [b]Skill Progression[/b]
 [list]
-[*][b]Fitness XP[/b]: Gain +0.05 XP per minute of skating (any terrain)
-[*][b]Nimble XP[/b]: Gain +0.02 XP per minute of skating on stairs
+[*][b]Fitness XP[/b]: Gain +12 XP per minute of skating (any terrain)
+[*][b]Nimble XP[/b]: Gain +4.8 XP per minute of skating on stairs
 [*][b]Trait XP Boost[/b]: +10% XP if you have the Rollerblader trait
 [*][b]Only while moving[/b] — standing still doesn't grant XP
 [/list]
 
-[b]Fatigue System[/b]
+[b]Endurance System[/b]
 [list]
-[*][b]Increased fatigue[/b] while skating:
+[*][b]Increased endurance drain[/b] while skating:
 [list]
-[*]Walking: 0.01 drain per tick (significantly more than normal)
-[*]Running: 0.015 drain per tick (very exhausting)
+[*]Walking: 0.0075 drain per tick (significantly more than normal)
+[*]Running: 0.005 drain per tick (very exhausting)
 [*]Stairs: additional 1.75x multiplier on top
 [*]Blocked terrain: additional 2.5x multiplier on top
 [/list]
@@ -76,7 +80,6 @@ Rollerblades now generate realistic movement noise that attracts nearby zombies.
 Noise scales with your speed and the surface you're skating on. 
 Hard surfaces like concrete and asphalt are louder, while grass and dirt dampen the sound. 
 Sneaking on wheels is possible but still noisier than regular footwear — plan your routes carefully.
-
 
 [table]
     [tr]
@@ -97,7 +100,7 @@ Sneaking on wheels is possible but still noisier than regular footwear — plan 
     [tr]
         [td]Sprinting[/td]
         [td]~11[/td]
-        [td]17[/td]
+        [td]15[/td]
     [/tr]
     [tr]
         [td]Sneaking[/td]
@@ -243,20 +246,18 @@ Actions are instant!
 
 ---------------------------------------------------------
 
-[b]Version[/b]: 1.3
+[b]Version[/b]: 1.3.1
 [b]Build[/b]: 42+
 [b]Multiplayer[/b]: Should work
-[b]Last Updated[/b]: February 18, 2026
+[b]Last Updated[/b]: February 20, 2026
 
 ---------------------------------------------------------
-
-[h1]Pre Relase Notes:[/h1]
 
 [b]v1.3[/b]
 [list]
 [*]Added [b]Rollerblader Trait[/b] (3 points):
 [list]
-[*]25% less fatigue drain while skating
+[*]25% less endurance drain while skating
 [*]50% less fall chance on stairs and while attacking
 [*]20% slower durability loss on wheels and boots
 [*]10% XP boost to Fitness and Nimble
@@ -272,3 +273,15 @@ Actions are instant!
 [*]Fix Repair and Clean Wheels for MP
 [*]Fix XP System for MP
 [/list]
+
+---------------------------------------------------------
+
+[b]v1.3.1[/b]
+[list]
+[*] Added Animation
+[*] Added Sandbox Config
+[*] Removed logs
+[*] Adjusted speed to account for animation 
+[/list]
+
+---------------------------------------------------------

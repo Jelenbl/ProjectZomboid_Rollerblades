@@ -1,5 +1,5 @@
 -- RB42_TooltipClient.lua
--- Adds wheel and boot durability info to the rollerblade item tooltip on hover
+-- Adds separate wheels and boots condition bars to rollerblades tooltip
 
 require "RB42_RollerbladesShared"
 
@@ -7,84 +7,80 @@ local function isRollerblades(item)
     return item and item.getFullType and item:getFullType() == "Rollerblades42.Rollerblades"
 end
 
--- Hook into ISToolTipInv to add durability info on hover
+-- Hook into ISToolTipInv to add custom rendering
 local function initTooltipHook()
     if not ISToolTipInv then return false end
-    
+
+    -- Store original render function
     local originalRender = ISToolTipInv.render
     if not originalRender then return false end
-    
-    function ISToolTipInv:render()
+
+    -- Override render to add custom condition bars for rollerblades
+    ISToolTipInv.render = function(self)
         -- Call original render first
         originalRender(self)
-        
-        -- Only modify for rollerblades
-        local ok, _ = pcall(function()
-            local item = self.item
-            if not item or not isRollerblades(item) then return end
-            
-            -- Get durability data
+
+        -- Only customize if this is rollerblades
+        local item = self.item
+        if not item or not isRollerblades(item) then return end
+
+        pcall(function()
             local md = item:getModData()
             if not md then return end
-            
-            -- Initialize if needed
+
+            -- Initialize durability if needed
             if md.rb_wheels == nil then md.rb_wheels = RB42.Config.WheelsMax end
             if md.rb_boots == nil then md.rb_boots = RB42.Config.BootsMax end
-            
-            local wheelsPct = math.floor((md.rb_wheels / RB42.Config.WheelsMax) * 100)
-            local bootsPct = math.floor((md.rb_boots / RB42.Config.BootsMax) * 100)
-            
-            -- Draw durability info directly using drawText
-            -- Position below the existing tooltip content
-            local x = self:getAbsoluteX() + 12
-            local y = self:getAbsoluteY() + self:getHeight() - 4
-            local lineH = 16
-            
-            -- Header
-            self:drawText("Rollerblade Condition:", x, y, 0.8, 0.8, 1.0, 1.0, UIFont.Small)
-            y = y + lineH
-            
-            -- Wheels line with color
-            local wr, wg, wb = 0.4, 1.0, 0.4  -- green
-            local wheelsLabel = "  Wheels: " .. wheelsPct .. "%"
-            if wheelsPct <= 0 then
-                wr, wg, wb = 0.6, 0.6, 0.6
-                wheelsLabel = "  Wheels: DESTROYED"
-            elseif wheelsPct <= 30 then
-                wr, wg, wb = 1.0, 0.4, 0.4  -- red
-            elseif wheelsPct <= 60 then
-                wr, wg, wb = 1.0, 1.0, 0.4  -- yellow
-            end
-            self:drawText(wheelsLabel, x, y, wr, wg, wb, 1.0, UIFont.Small)
-            y = y + lineH
-            
-            -- Boots line with color
-            local br, bg, bb = 0.4, 1.0, 0.4
-            local bootsLabel = "  Boots: " .. bootsPct .. "%"
-            if bootsPct <= 0 then
-                br, bg, bb = 0.6, 0.6, 0.6
-                bootsLabel = "  Boots: DESTROYED"
-            elseif bootsPct <= 30 then
-                br, bg, bb = 1.0, 0.4, 0.4
-            elseif bootsPct <= 60 then
-                br, bg, bb = 1.0, 1.0, 0.4
-            end
-            self:drawText(bootsLabel, x, y, br, bg, bb, 1.0, UIFont.Small)
-            y = y + lineH
-            
-            -- Destroyed warning
-            if wheelsPct <= 0 then
-                y = y + 4
-                self:drawText("No speed bonus with broken wheels!", x, y, 1.0, 0.3, 0.3, 1.0, UIFont.Small)
-            end
+
+            -- Calculate percentages
+            local wheelsPct = md.rb_wheels / RB42.Config.WheelsMax
+            local bootsPct = md.rb_boots / RB42.Config.BootsMax
+            if wheelsPct < 0 then wheelsPct = 0 elseif wheelsPct > 1 then wheelsPct = 1 end
+            if bootsPct < 0 then bootsPct = 0 elseif bootsPct > 1 then bootsPct = 1 end
+
+            -- Get font height for positioning
+            local fontHgt = getTextManager():getFontHeight(UIFont.Small)
+
+            -- Position bars directly under the tooltip
+            local barStartY = self:getHeight() + 4  -- Start 4 pixels below tooltip
+            local barSpacing = fontHgt + 6
+
+            -- Bar dimensions
+            local barWidth = self:getWidth() - 16
+            local barHeight = 5
+            local barX = 8
+            local labelPadding = 2
+
+            -- Render wheels condition
+            self:drawText(" Wheels Condition:", barX, barStartY, 1, 1, 1, 1, UIFont.Small)
+            local wheelsBarY = barStartY + fontHgt + labelPadding
+            local wheelsColor = {
+                r = 1.0 - wheelsPct,
+                g = wheelsPct,
+                b = 0.0,
+                a = 1.0
+            }
+            self:drawProgressBar(barX, wheelsBarY, barWidth, barHeight, wheelsPct, wheelsColor)
+
+            -- Render boots condition
+            local bootsTextY = wheelsBarY + barHeight + 4
+            self:drawText(" Boots Condition:", barX, bootsTextY, 1, 1, 1, 1, UIFont.Small)
+            local bootsBarY = bootsTextY + fontHgt + labelPadding
+            local bootsColor = {
+                r = 1.0 - bootsPct,
+                g = bootsPct,
+                b = 0.0,
+                a = 1.0
+            }
+            self:drawProgressBar(barX, bootsBarY, barWidth, barHeight, bootsPct, bootsColor)
         end)
     end
-    
-    print("[RB42 Tooltip] Hooked ISToolTipInv.render")
+
+    print("[RB42 Tooltip] Hooked ISToolTipInv.render for custom condition bars")
     return true
 end
 
--- Try to hook on game start (ISToolTipInv may not exist immediately)
+-- Try to hook on game start
 local hookAttempts = 0
 local function tryHook()
     if initTooltipHook() then
@@ -92,9 +88,9 @@ local function tryHook()
         return
     end
     hookAttempts = hookAttempts + 1
-    if hookAttempts > 600 then  -- Give up after ~10 seconds
+    if hookAttempts > 600 then
         Events.OnTick.Remove(tryHook)
-        print("[RB42 Tooltip] Could not find ISToolTipInv after 600 ticks, giving up")
+        print("[RB42 Tooltip] Could not find ISToolTipInv after 600 ticks")
     end
 end
 

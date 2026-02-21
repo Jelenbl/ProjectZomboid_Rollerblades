@@ -9,14 +9,14 @@ A fully-featured mod that adds functional rollerblades to Project Zomboid with t
 
 ### Rollerblader Trait (NEW!)
 A 3-point positive trait that gives you a head start on skating:
-- **25% less fatigue drain** while skating
+- **25% less endurance drain** while skating
 - **50% less fall chance** on stairs and while attacking
 - **20% slower durability loss** on wheels and boots
 - **10% XP boost** to Fitness and Nimble while skating
 - **Start with Rollerblades** — no need to find them!
 
 ### Dynamic Speed System
-- **Hard surfaces** (concrete, asphalt, indoor floors, streets): _+50% speed boost_
+- **Hard surfaces** (concrete, asphalt, indoor floors, streets): _+25% speed boost_
 - **Soft surfaces** (grass, vegetation, carpet): _25% speed_
 - **Stairs**: _-70% speed_ (dangerous!)
 - **Blocked** (trees, bushes, hedges): _-70% speed_ — pushing through vegetation is brutal
@@ -39,15 +39,15 @@ A 3-point positive trait that gives you a head start on skating:
 - **Scratch Chance:** 40%
 
 ### Skill Progression
-- **Fitness XP:** Gain +0.25 XP per minute of skating (any terrain)
-- **Nimble XP:** Gain +1 XP per minute of skating on stairs
+- **Fitness XP:** Gain +12 XP per minute of skating (any terrain)
+- **Nimble XP:** Gain +4.8 XP per minute of skating on stairs
 - **Trait XP Boost:** +10% XP if you have the Rollerblader trait
 - **Only while moving** — standing still doesn't grant XP
 
-### Fatigue System
-- **Increased fatigue** while skating:
-  - Walking: 0.01 drain per tick (significantly more than normal)
-  - Running: 0.015 drain per tick (very exhausting)
+### Endurance System
+- **Increased endurance drain** while skating:
+  - Walking: 0.0075 drain per tick (significantly more than normal)
+  - Running: 0.005 drain per tick (very exhausting)
   - Stairs: additional 1.75x multiplier on top
   - Blocked terrain: additional 2.5x multiplier on top
 
@@ -59,7 +59,7 @@ Rollerblades now generate realistic movement noise that attracts nearby zombies.
 | -------- | ------ | ----------- |
 | Walking  |   ~7   |      10     |
 | Running  |   ~8   |      13     |
-| Sprinting  |   ~11   |      17     |
+| Sprinting  |   ~11   |      15     |
 | Sneaking  |   ~3   |      6     |
 | Stairs  |   -   |      14     |
 | Blocked  |   -   |      8     |
@@ -162,10 +162,10 @@ Actions are instant!
 
 ---
 
-**Version:** 1.3
+**Version:** 1.3.1
 **Build:** 42+
 **Multiplayer:** Should work
-**Last Updated:** February 17, 2026
+**Last Updated:** February 20, 2026
 
 ---
 
@@ -173,7 +173,7 @@ Actions are instant!
 
 ### v1.3
 - Added **Rollerblader Trait** (3 points):
-  - 25% less fatigue drain while skating
+  - 25% less endurance drain while skating
   - 50% less fall chance on stairs and while attacking
   - 20% slower durability loss on wheels and boots
   - 10% XP boost to Fitness and Nimble
@@ -184,4 +184,12 @@ Actions are instant!
 - Added Animation of Skating while "Running" - to be improved upon
 - Added Fall Chance While Attacking
 - Added Noise Levels
+- Fix Repair and Clean Wheels for MP
+- Fix XP System for MP
+
+### v1.3.1
+- Added Animation
+- Added Sandbox Config
+- Removed logs
+- Adjusted speed to account for animation
 
